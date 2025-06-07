@@ -1,0 +1,3151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Doia Mem Mbusyamei Nya</title>
+    <!-- Memuat Tailwind CSS dari CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js" defer></script>
+    <style>
+        /* Menggunakan font Inter untuk tampilan yang modern */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Warna latar belakang abu-abu muda */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-8 px-4">
+    <!-- Kontainer utama aplikasi -->
+    <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-2xl">
+        <!-- Header Aplikasi -->
+        <header class="text-center mb-6">
+            <h1 class="text-4xl font-extrabold text-blue-700 mb-2">Doia Mem Mbusyamei Nya</h1>
+            <p class="text-gray-600 text-lg">Kumpulan Lagu Pujian Suku Arfak Sub Suku Hatam</p>
+        </header>
+
+        <!-- Bagian Pencarian Kidung -->
+        <div class="mb-6">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Cari Srat Doia berdasarkan nomor..."
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                onkeyup="filterHymns()"
+            >
+        </div>
+
+        <!-- Daftar Kidung (Contoh) -->
+        <div id="hymnList" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 max-h-96 overflow-y-auto pr-2">
+            <!-- Contoh item kidung. Data ini bisa dimuat dari JSON atau API di aplikasi nyata. -->
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 1: Tuhan Allah pai tes mun di hagom" data-lyrics="Srat nipoua pui binye srat bibieba pai binye
+Pia
+		Tuhan Allah nipoua Tuhan Allah bibieba
+Leu api
+		Ug pai tes dihyeisia ug pai tes mpia-bbet him
+Tut
+		Mun hagom heisia mun hagom jotia
+Gima yok cem hagom
+		Kei-kau kei dem nihyet dia-diau kei kum ningat.
+">
+                <span class="font-semibold text-lg">Doia 1</span>
+                <span class="block text-sm">Tuhan Allah pai tes mun di hagom</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 2: Tuhan Allah de nisindem" data-lyrics="Tuhan Allah kan binonti Tuhan Allah kan binongkom
+Yai
+		Ninyeng bikwop singmur hagom ninyeng bikwop hama
+Nonti nongkom kan bidem			         /hagom
+		Abou nta nimangtia ibou nta ninggreusia
+">
+                <span class="font-semibold text-lg">Doia 2</span>
+                <span class="block text-sm">Tuhan Allah de nisindem</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 3: Adam nikwei leusi" data-lyrics="Tungwatu nya
+		Ikwei leu hantou i ikwei leu gi tou i
+Tuhan Allah bon
+		Adam nok nontia Adam nok nongkoma
+Leu
+		Dihyei ndung nipoua dihyei ndung bibieba
+Tuhan Allah bon Adam kin
+		Ningon bei kuwesa ninget bei pigaba
+		Yahagom ei Adama yahagom ei Hawaba
+		Inggroma noyama inggroma dem yama
+		Ingut ig mem ineia ingut ig mem ingada
+">
+                <span class="font-semibold text-lg">Doia 3</span>
+                <span class="block text-sm">Adam nikwei leusi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 4: Sisar coi dihyeisi dini" data-lyrics="Tuhan Allah
+		Nihyet Injil nihyet srina nihyet Repo nihyet waba
+Nihyet srin ser nihyet wa ser
+		Andig nipou Adama sindig ipou Hawaba
+Noro ma Adama Hawa ne
+		Imig de nggan jit ei ibiau de nggan hak ei
+Ba, yoni ne
+		Isir Injil isir eia ikriau Repo ikriau eia
+No ma ne
+		Tuhan Allah juk kweia Tuhan Allah srek kweia
+Tuhan Allah juk kwei srek kwei ba,
+		Hig singgre Adama jem singgre Hawaba
+Adama Hawa ne
+		Yoni ibon dosaba yoni ibon sisara
+Apino
+		Tuhan Allah huk yoka Tuhan Allah ci yoka
+		Huk yok ndam hou nghoua ci yok ndam es nghoua
+Adama Hawa ne igwam lo,
+		Bet pus ingona jam kiek inggeda
+Ne ipim bipus ipim bikiek
+		Minu kei-kau Edena dihyei kei-kau Firdausa
+Adam Hawa igyai nggwei itiem nggwei dima ne
+		Srig bidem hou nghoua kibor bidem es nghoua
+">
+                <span class="font-semibold text-lg">Doia 4</span>
+                <span class="block text-sm">Sisar coi dihyeisi dini</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 5: Sisar coi dihyeisi dini" data-lyrics="Tuhan Allah nihyet waba Tuhan Allah nihyet srina
+Nihyet srin ser nihyet wa ser
+		Anding nipou Adama sindig nipou Hawaba	
+Noro ma
+		Yo ibit nihyet bi yo ibram prenta bi
+Ba,
+		Yahara kep biei toua  yahara tut biei ngada
+Ei
+		Minu kei-kau Edena dihyei  kei-kau Firdausa
+Apino
+		Tuhan Allah huk yoka Tuhan Allah ci yoka
+Ba, imbut leu inang leu
+		Minu kei-kau Edena dihyei kei-kau Firdausa
+Leu api Tuhan Allah cuk
+		Malaikat leu nanggi malaikat leu gwamti 
+Ug gwam ser ug ya ser
+		Bunggan kioi Edena bunggan kioi Firdausa
+">
+                <span class="font-semibold text-lg">Doia 5</span>
+                <span class="block text-sm">Sisar coi dihyeisi dini</span>
+            </button>
+           
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 6: Sisar coi dihyeisi dini" data-lyrics="Srat nipou pui muna srat nipou pai muna
+Tut
+		Andig nipou Adama sindig nipou Hawaba
+	Ei minu kei-kau Edena dihyei kei-kau Firdausa
+Tuhan Allah ug preu kep ser
+		Biei sisar ningada biei di kinei nitoua
+Noro
+		Yoni ibit nihyet bi yoni ibram prenta bi
+Ba, yug puk kep yug yai kep
+		Biei sisar nitoua biei di kinei ningada
+Apino
+		Tuhan Allah ci yoka Tuhan Allah huk yoka
+Ci yok ug ei huk yok ug ei
+		Dihyei Eden nibei nghima dihyei Eden nibei nyaia
+Leu api Tuhan Allah cuk
+		Malaikat leu gwamti malaikat leu nanggi
+Tut
+		Simeda njeng sreia simeda mbom tiguta
+Ba, 
+		Ug ya ser dimboua ug ya ser bisaia
+Ser Adam Hawa leu nhyepo ikwei
+		Minu Eden bu bia dihyei Firdaus bu aua.
+">
+                <span class="font-semibold text-lg">Doia 6</span>
+                <span class="block text-sm">Sisar coi dihyeisi dini</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 7: Hai Sisar coi dihyeisi dini" data-lyrics="Tuhan Allah kan binongkom Tuhan Allah kan binonti
+Ug kan tut
+		Mipui nipou Adama ntam nipou Hawaba
+Po 
+		Yoi bit nihyet bi yo ibram prenta bi
+Apino ibindei ba,
+		Sisar coi minu nia dosa coi dihyei nia.
+">
+                <span class="font-semibold text-lg">Doia 7</span>
+                <span class="block text-sm">Sisar coi dihyeisi dini</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 8: Adam Hawa nya icut ei sisarti habiei nimbie him" data-lyrics="Pui muna pai mun nok
+		Srat Nitriti pui muna srat Nitriti pai muna
+Tut pung di nyeni intun him di
+		Ihig ninyeng Adama ijem ninyeng Hawaba
+Di Tuhan Allah kes yok ei kuk yok ei
+		Minu kei-kau Edena dihyei kei-kau Firdausa
+Leu api
+		Tuhan Allah sok kep yok Tuhana preu kep yok
+		Ser biei ninggimau nitoua bie hacan ningada
+Lewo nipoua bibie ne
+		Ingon bei sren jita ingget bei kwes jita
+Gima rino imbrap bit Tuhan Allah
+		Di bikwop mmun ngwaba di bikwop njap ngwaba
+Noro ma Hawa ne hei dimbou hei bisai di
+		Hara kep biei toua hara kep biei ngada
+Leu api biei tou dima biei ngat dima ne
+		Brim ningon brim rina yai ningget yai rina
+Ba, puk nimun yem nide di
+		Ttei hi bak nisuta yai hi bak nicepa
+Gima rino idut rin igyem rin di
+		Ingon bei ki bibora ingget bei tek bibora
+Apino ikan tut
+		Mun di kinei hagoma mun di kei hagoma
+Gima rino idigit leu yam immai leu yam di
+		Iku yok nding biei boua iku yok nding ba boua
+Leu api ikwei nap kep nimenga ninjen nok
+		Biei ara nimenga biei ara ninjena
+Di 
+		Ibinggai kep yok ninghigya ibijuk ser yok nikera
+Leu api
+		Tuhan Allah juk kweia Tuhan Allah srek kweia
+Di 
+		Hig singgre Adama hig singgre Hawaba
+Bipia tou rino bibon na ngginau je di
+		Jingon bei ki dima jingget bei tek dima
+Leu api Adama Hawa ne
+		Idigit tut yontia immai sut yongkoma
+Gima rino injei kep imbres kep di
+		Adam njei kep Hawaba Hawa mbres kep Bilisa
+Gima rino injei kep ninyen imbres kep ninyen di imbut leu
+										      /idor leu
+		Minu Eden jo eia dihyei Firdaus nna eia.
+">
+                <span class="font-semibold text-lg">Doia 8</span>
+                <span class="block text-sm">Adam Hawa nya icut ei sisarti habiei nimbie him</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 9: Kain kin Habel" data-lyrics="Srat nipou pui binye srat bibie pai binye
+Pui binye pai binye tut
+		Adam pmot Kaina Hawa pmot Habela
+Po 
+		Tuhan Allah pai biyok Tuhan Allah pui biyok
+Pia
+		Je jittei ninggroma je jittei ninghuigya
+Ba,
+		Jibikuk je bidania jibikuk je bidangkoma
+Noro ma Tuhan Allah kou
+		Kain de nitoua Kain de ningada
+Noro ma ningon ngakei Habel tut nide
+		Domba pmot di gwam tuta domba mien di bong tuta
+Domba pmot domba mien dima ne igbit nok
+		Allah ngon ce tuta Allah ngget joi suta.
+">
+                <span class="font-semibold text-lg">Doia 9</span>
+                <span class="block text-sm">Kain kin Habel</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 10: Kain bui Habel" data-lyrics="Srat nipou pui binye srat bibie pai binye
+Tut Kain po bui Habel ba,
+		Noni mai jit ugwe noni mai hak ugwe
+Leu api
+		Tuhan Allah ci ugwa Tuhan Allah huk ugwa
+Ciu ug ndam huk ug ndam
+		Nungug hanjop nontia mboi hanjop Henokha
+Ba,
+		Tuhan Allah pui baka Tuhan Allah pai baka
+Pia
+		Abong-bong wai dem minua agwam-gwam wai nggi 
+Leu api aya tut amunggwom bat ba,		       /minua
+		Jiya bidem minu nia jiya bidem dihyei nia.
+">
+                <span class="font-semibold text-lg">Doia 10</span>
+                <span class="block text-sm">Kain bui Habel</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 11: Nuh bibon kibara" data-lyrics="Pui muna pai mun nok
+		Srat nipou pui muna srat nipou pai muna
+Tut Tuhan Allah sok nihyet ei
+		Srat Injilti kweia srat Repoti kweia
+Ba,
+		Kwei jo bak Nuha kwei jo bak Noaka
+Pia Nuh e, Noak e,
+		Abong pus nok aua abong kiek nok aua
+Noro akiju kui ahyen kui ba, akwei yai kep
+		Biai mbrei ninera buar mbrei nisraba
+Ba,
+		Akwei bingot mer igya akwei bibon kibar igya
+Nuha Noaka ne pui ug bak pai ug bak
+		Andig nipou noro bi sindig nipou noro bi
+Andig nipou sindig nipou
+		Ingon bei sir eia ingget bei kriau eia
+Gima rino Nuh hyet sibui no tut kiek no tut andig nipou 
+								         /sindig nipou apino
+		Ipim ser mer igya ipim tai kibar igya.
+">
+                <span class="font-semibold text-lg">Doia 11</span>
+                <span class="block text-sm">Nuh bibon kibara</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 12: Tungwatu nya ipa tut Nuh" data-lyrics="Andig nipou sindig nipou
+		Ipa tut Nuha isrep tut Noaka
+Pia
+		Abon kibar mem mindei abon kibar mem tou i
+Leu
+		Minyei di tou mikwei yai e bigut di tou mikwei ttei e
+Noro ma Tuhan Allah
+		Cuk biget leu nanggi cuk bigut leu gwamti
+Ba, biget hwen bigut hwen
+		Andig nipou inanga sinding nipou ittina
+">
+                <span class="font-semibold text-lg">Doia 12</span>
+                <span class="block text-sm">Tungwatu nya ipa tut Nuh</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 13: Minyei ut kep dihyei ngwa dip" data-lyrics="Nuh nongkom heu uda Nuh nongkom bon uda
+	Bon uda ei nungug nnuma heu ud ei mboi nnuma
+Nungug nnuma mboi nnum ne
+		Minyei di tou kwei yai e minyei di tou kwei ttei e
+Noro ma Tuhan Allah
+		Pinak biget leu gwamti pinak bigut leu nanggi
+		Minyei sau ud mbreia minyei sau kibar mbreia
+Nuha Noak ne
+		Kwei cuk kep miniwoua kwei cuk kep minimara
+		Ug ninno bed ugwe ug ninno jam ugwe
+Noro ma Nuha Noak ne
+		Kwei cuk kep sigbei mbreia kwei cuk kep hakimoia
+		Ndung biei meng mam beia kot biei meng mamira
+		Kwei su bak Nuha kwei yai bak Noaka
+Pia
+		Minyei ndig nggram sri bigyo muk ndig nggram pra 
+											/bigyo
+Nuh ya tut nimunggwom bat nitnem yoni ne
+		Ibimbop ei mer igya ibimbop ei kibar igya
+">
+                <span class="font-semibold text-lg">Doia 13</span>
+                <span class="block text-sm">Minyei ut kep dihyei ngwa dip</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 14: Andig nipou nya isrep tut Nuh nihyet" data-lyrics="Kwei puia kwei pai nok
+		Srat Injil kwei puia..srat Injil kwei paia
+Kwei pui sut kwei pai sut
+		Andig nipou Nuha mipui nipou Noaka
+Nuha Noak po
+		Ya lo, ma pus no ba, ya lo, ma kiek no ba,
+Pui ug bak pai ug bak
+		Andig nipou yonia sindig nipou yo cema
+Pia Tuhan Allah
+		Kwei cuk kep dania kwei cuk kep da cema
+Pia
+		Nan abon ut mbreia nan abon kibar mbreia
+Leu da diba
+		Biget hwen minu ni ri bigut hwen dihyei ni ri
+Nuha Noak ne pui ug bak pai ug bak andig nipou sindig 
+								/nipou noro ma yoni ne
+		Ingon de sir jit eia ingget de kriau hak eia
+Ba, yoni ne
+		Ipui ug bak Nuha ipai ug bak Noaka
+Pia nye ningat
+		Biget sigau nimig bigyo hem sigau ningwa bigyo
+Noro ma
+		Dem igbit ngon boua pas igbit tto boua
+Ne Tuhan Allah kwei pinak kep
+		Biget sigau leu nanggia hem sigau leu gwamtia
+Kwei bihwen
+		Andig nipou ningwigya sindig nipou nipwoia
+Gima ne bindo tut
+		Gembala su mbuna pembela su ngkiema
+Su mbuna su ngkiem po kwei bakep Allah hyet Yesus hyet
+		Kwei bisok kep nyenia kwei bisok kep jenia
+Leu nhyepo Allah hyet Yesus hyet
+		Kiek nye leu dosaba kiek nye leu sisara
+Ba, nyeni ne
+		Ibit nihyet Allahba ibit nihyet Yesusa
+Ba, igyai igbit ibon igbit
+		Allah ngon ce tuta Allah nget joi suta
+Noro ma tungwatu minu nia tungwatu dihyei ni ne ingon 
+								    /de sir ingget de kriau
+		Allah hyet jit eia Yesus hyet hak eia
+Ba, yoni ne
+		Ikou nihyet ninghigya irok nihyet nikera
+Gima rino mpe di Yesus kwei hanyen umertia kwei hanyen 
+					      /bumbuhuiti ne mporo ma igyai hukum nok
+		Andig nipou pima ri sindig nipou pima cem.
+">
+                <span class="font-semibold text-lg">Doia 14</span>
+                <span class="block text-sm">Andig nipou nya isrep tut Nuh nihyet</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 15: Hai Allah krau kusin mem kibar cem gwamti cem" data-lyrics="He uda bon ut nok
+		Nuh nongkom heu uda noak nongkom bon uda
+		Heu ud ei nungug nnuma bon ud ei mboi nnuma
+Ba,
+		Minyei di tou kwei yai i biget di tou kwei hwen i
+Noro Tuhan Allah kwei pinak kep
+		Biget ndig leu nanggia bigut ndig leu gwamtia
+Ba, bigut hwen biget sar
+		Andig nipou inanga sindig nipou ittina
+Ba, yoni ne yug yai kep
+		Ingon bei pus eia ingget bei kiek eia
+Leu api idor ba,
+		Yug hara Nuha yug hara Noaka
+Bipia
+		Akau dimbou leu nyeba akau bisai leu nye cem
+Noro ma Nuha Noaka
+		Pus nihyet pui biyok kiek nihyet pai biyok
+Bipia
+		Da dikrau kusin bia da diyai slot bia
+Lewo kusin dima slot dima ne
+		Tuhan Allah krau nimuna Tuhana krau nideba
+Ba, kusin kep mer igya slot kep kibar igya gima rino 
+					        /andigpoi nipou sindig bibie nya ne
+		Ipus ighyet ipui biyam ikiek ighyet ipai biyam
+Bipia
+		Mer ig bei di Nuh deba kibar ig bei di Noak de
+Ne
+		Bon nikui nikui kan bi bon nibri nibri kan bi
+Gi mbuna nggruk nok
+		Mer gi mbun ibri bi kibar nggruk ikui bi
+">
+                <span class="font-semibold text-lg">Doia 15</span>
+                <span class="block text-sm">Allah krau kusin mem kibar cem gwamti cem</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 16: Nihyet mang kwei leu ig Babil" data-lyrics="Pui mun nok pai mun nok
+		Srat nipou pui muna srat bibie pai muna
+Pui mun tut pai mun tut
+		Nuh nipmot Semia Nuh nipmot Hamia
+Po
+		Ibong ei briep ndigya ibong ei mbreia
+Gi jo ndam
+		Mpiaba nipritia mpiaba nitausia
+No ma ne Semia Hami ne
+		Ikiek ighyet ipui biyam ikiek ighyet ipai biyam
+Pia je jikwei nyeni ingot
+		Ig nut yam Babila ig pam yam Babila
+Ba,
+		Yug binggok Allahba yug binggok Yesusa
+No ma ne Tuhan Allah
+		Ningon bei pus tut yok ninget bei kiek tut yok
+Leu api Tuhan Allah
+		Mbus hukum ei mem yok mbus hukum ei kum yok
+Apino itin ndigban ipian ndigban
+		Intek bidem minu nia intek bidem dihyei nia
+Ba, inang leu imbut leu
+		Ig Babil nisieng buigya ig Babil nisieng hwena
+Nisieng bui nisieng hwen po
+		Nihyet mang kwei leua nihyet nggreu jo leua.
+">
+                <span class="font-semibold text-lg">Doia 16</span>
+                <span class="block text-sm">Nihyet mang kwei leu ig Babil</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 17: Abraham ba ningon com Tuhan Allah" data-lyrics="Srat nipou pui binye srat bibie pai binye
+Tut Abraham po
+		Nggei-nggwang tut Tuhan Allah nggei-nggwang tut 
+										    /Tuhana
+Leu api
+		Ningon jo kep Tuhan Allah ningget jo kep Tuhana
+Gima rino
+		Ningon bei kwes jita ningget bei singat jita
+Ba,
+		Nggei nggwang tut Tuhan Allah nggei-nggwang tut 
+Apino Abraham nonti nongkom ne nok		   /Tuhana
+		Sonto mem nyenia bindo mem jenia.
+">
+                <span class="font-semibold text-lg">Doia 17</span>
+                <span class="block text-sm">Abraham ba ningon com Tuhan Allah</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 18: Lut nya inang leu Sodom" data-lyrics="Srat nipou pui binye srat bibie pai binye
+Tut 
+	Malaikat leu gwamti malaikat leu nanggi
+Po
+		Kwei pui bak Lota kwei pai bak Luta
+Pia akiju leu ahyen leu
+		Minu Sodom minu nia dihyei Gomor dihyei nia
+Ba,
+		 Abuwak atnem aug suta abuwak amunggwom ambut 
+Ba,									    /tuta
+		Abrim amig hanyaia ayai amig sisraua
+Ba,
+		Je jug ndam cet him je jug ndam mam hima
+Noro ma Lot nitnem
+		Hig ningon eisia hig ningget eisia
+Leu api balambat batelat di
+		Yai hukum nibei nghima yai hukum nibei nyaia
+No ma ne
+		Bukti mem nyenia bindo mem jenia
+Leu mpe di Yesus Kristus
+		Kwei hanyen umertia kwei hanyen bumbuhuitia
+Ne mben Bilis mben sisar
+		Ibalambat hi bu yo ibatelat hi kin yo
+Noro ma munggwom murit munggwom Kresten yoni ne
+		Ibalambat bu bia ibatelat bu aua.
+">
+                <span class="font-semibold text-lg">Doia 18</span>
+                <span class="block text-sm">Lut nya inang leu Sodom</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 19: Abraham ba ningon com Allah bingig nitingou mem" data-lyrics="Repo Timiei pui muna Gi Preu Timiei pai muna
+Tut Tuhan Allah po
+		Noni jem Abrahama noni hig Ibrahima
+Bipia nangkom nanti ne akiju ba, ambut leu ador leu
+		Atimieisi jo eia minu bei nna eia
+No ma cem akes acig bat yahagom ade bat yahagom leu 
+						  /api ambut ndam ador ndam minu dima
+		Da dindo binania da dindo bina cema
+Leu nhyepo dibibon nani nok pung di intun himn
+		Mem keret hagoma mem pamir hagoma
+Gima rino Abraham Ibrahim ne
+		Ba ningon com Tuhan Allah ba ningget com Tuhana
+Apino Abrahama Ibrahim ne
+		Ngig nitingou ei mema kau ningon ei kuma
+Ba, noni yai igbit bon igbit
+		Nihyet di kei nipuisia nihyet di kwes nipaisia
+Leu api Abraham Ibrahim noni nok ningat di kei nitou 
+									         /di kei di
+		Mem keret hagoma mem pamir hagoma
+Nok mingat nijit po tug hon ngkwei hon Yesus Kristus po 
+								        /tto eia preu ei nok
+		Srat Injil tto eia srat Repo preu eia.
+">
+                <span class="font-semibold text-lg">Doia 19</span>
+                <span class="block text-sm">Abraham ba ningon com Allah bingig nitingou mem</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 20: Ribkah ce tut Tuhan Allah ningon kanti" data-lyrics="Pui muna pai mun nok
+		Srat Nitriti pui muna srat Nitriti pai muna
+Tut Abraham po noni cuk
+		Nide awak ningon gom nide awak ningon kwes
+Bipia nan anggok
+		Sop pilei hi bua sop pilei hi kina
+Apino
+		Noni kui untaba noni kui kudaba
+Ba,
+		No ug ei minu tinga no ug ei mboi nnuma
+Leu api tau hak kep
+		Sop pilei nibuna sop pilei nijeba
+Po
+		Niyaijoti kwes bibor niyai munti kei bibor
+		Habiei leu nicigya nok-nok leu nipmema
+Sop dima sop dini ne
+		Ijem ninyeng Ribkahba ikon ninyeng nonia
+Apino awak andigpoi ne
+		Hig bipus nonia hig bikiek no cema
+Leu api Ribkah ne
+		Ndo sonto kei-kaua ndo bindo dia-diaua
+Ba,
+		Bit nihyet awaga bram nihyet andigpoi
+Apino awak andigpoi ne ningon kei ningget kei ba,
+		Cug masa cug baka yai mbrawin yai baka
+Leu api Ribkah ne
+		Ug sut ndam nicigya ug sut ndam nipmema
+Apino nicig nipmem nya ne yoni ipai
+		Nan abit jit ugwe nan abram hak ugwe
+Gima rino Ribkah ne
+		Bit nihyet arigya bram nihyet ameia
+Ba, noni bit awak ba,
+		Yoni ikui untaba yoni ibri kudaba
+Leu api
+		Ug sut ndam Ishaka kwei sut ndam Kanaan
+Apino noni ne
+		Ndo sonto kei-kaua ndo bondo dia-diaua
+Ba,
+		Bit nihyet Ishaka bram nihyet nicepa
+Igbit leu nok gi po ndo sonto
+		Habiei leu nimig ngwoia nok-nok leu ninda ngwoia
+Apino Ishak ne
+		Kan-kan nyen ningon beia kan-kan nyen ningget beia
+Tut Ribkah po
+		Yai munggwom hi bia yai munggwom bu bia
+Apino
+		Hara bak Tuhan Allah hara bak Tuhana
+Leu api Tuhan Allah
+		Yai munggwom hi baka kes munggwom hi baka
+Igbit leu nok Ribkah nontia nongkom po
+		Ndo sonto kei-kaua ndo bindo dia-diaua
+Gima rino dani kin jeni ne
+		Igya lo, ma ipus nyeba igya lo, ma ikiek nyeba
+Ba, ingat ug ngat ingat kou ngat
+		Sonto leu Ribkahba bindo leu nonia
+Leu gi po Ribkah nonti nongkom nok
+		Sonto mem nyenia bindo mem jenia.
+">
+                <span class="font-semibold text-lg">Doia 20</span>
+                <span class="block text-sm">Ribkah ce tut Tuhan Allah ningon kanti</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 21: Tuhan Allah mbrap bit Yakub" data-lyrics="Gi preu nipou pui muna Gi Preu bibie pai muna
+Tut Tuhan Allah po
+		Pui kwei bak Yakuba pai kwei bak Yakoba
+Bipia
+		Dani ne Tuhan Allah dani ne Tuhana
+Po da dinok
+		Allah mem Abrahama Allah mem Ishaka
+Mporo da dipek
+		Minu dip dini hagoma dihyei dip dima hagoma
+Mem
+		Yo di intun nani him yo di intun jeni him
+Imangti dor njiriek
+		Dihyei nindung nimangtia dihyei ninnir ninggreusia
+Ne imangti inggreusi ne
+		Bon ikwop bia bon indat indat bia
+Po ibong bidem igya bidem
+		Mpia nipriti nibiho cema mpia nicutti nijai cema
+Ne mporo ma tungwatu dihyeisi dini hagom ne
+		Igyai gi kei leu nani igyai gi kwes leu na cem.
+">
+                <span class="font-semibold text-lg">Doia 21</span>
+                <span class="block text-sm">Tuhan Allah mbrap bit Yakub</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 22: Tuhan Allah pinak Yusuf ug ei Mesir" data-lyrics="Srat Kisah pui muna srat Kisah pai muna
+Pui mun tut pai mun tut Tuhan Allah
+	Pinak ninggum nindigya pinak nimai buhuna
+Pinak bidem
+	Minu Mesir hagoma dihyei Kanaan njek dipa
+Ba, mben Mesir mben Kanaan
+	Igyem njita hi bia iket njita bu aua
+Apino Tuhan Allah ug pinak kep Yusuf nok
+	Niboua mem Mesira niboua kum Firauna
+Nok gima rino njita di kei njita nindig kwei leua srek leua
+	Ig kantor Firauna ig gudan Mesira.
+">
+                <span class="font-semibold text-lg">Doia 22</span>
+                <span class="block text-sm">Tuhan Allah pinak Yusuf ug ei Mesir</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 23: Yusuf nyohou nikindig bat nya ei Mesir" data-lyrics= "Gi Preu nipou pui muna Gi Preu bibie pai muna
+Tut Tuhan Allah kwei pinak kep
+		Ninggum ndig leu nanggia nimai ndig leu gwamtia
+Ba, ninggum hwen nimai tot
+		Yakub pmot ningot ndigya Rahel pmot nimang ndigya
+Yakub pmot Rahel pmot yoni ikui kudaba yoni ikui 
+									      /keredaba ba,
+		Yo yug leu kanaana yo yug leu Betela
+Ba, yug ya nok
+		Ig kantor nibei nghima ig gudan nibei nyaia
+Ba, Yusuf Yosef ne hig bipus hig bikiek Yakub pmot Rahel 
+										       /pmot
+		Nikindig bat yonia nikindig bat yo cema
+Bipia
+		Jikwei leu hantou i jitau leu gi tou i
+Noro ma
+		Nikindig bat ningot ndigya nikindig bat nimang 
+									        /ndigya
+		Ipus ighyet ipui baka ikiek ighyet ipai baka
+Pia
+		Ninggum hwen nyenia nimai tot nye cema
+Gima rino
+		Nikwei leu Kanaana nitau leu Betela
+No ma ne Yusufa Yosep  ne niyai nggwei nitiem nggwei 
+								/srig bidem kibor bidem
+		Ig kantor Firauna ig gudan Mesira.">
+                <span class="font-semibold text-lg">Doia 23</span>
+                <span class="block text-sm">Yusuf nyohou nikindig bat nya ei Mesir</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 24: Domba ninggrom luei mben Yahudi" data-lyrics= "Mben Yahudi igyaijo
+	Ndo mindei binyeni e ndo mindei bijeni e
+Tuhan Allah kwek yo di awak
+	Leu minu Mesira leu dihyei Mesira
+Domba ninggrom jo
+	Nite hi dimboua nite hi bisaia
+Tuhan Allah sindem mem
+	Minyei ndig muk ngeia minyei ndig suan ngeia
+Yoni igyai kep domba ninggrom
+	Mem ide dosaba mem ide sisara
+Apino 
+	Domba luei yonia Kristus luei nyenia.
+">
+                <span class="font-semibold text-lg">Doia 24</span>
+                <span class="block text-sm">Domba ninggrom luei mben Yahudi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 25: Israel nya ingwes ngun leu Mesir cem minyei cem" data-lyrics="Srat di
+		Nehei Leusi pui muna Nehei Leusi pai muna
+Tut Tuhan Allah po
+		Kwei jem kep Musaba kwei jem kep Haruna
+Bipia akwei ttei kep
+		Nihyet Allah nihyet nia nihyet Tuhan nihyet moa
+Ba, aug bibui aug bihwen
+		Firaun ningona nibou ndig ninggeda
+Leu bima abie tut
+		Ade keret hagoma ade pamir hagoma
+Ba, jimbut leu jehei leu
+		Minu Mesir minu nia dihyei Firaun dihyei nia
+Noro ma
+		Firaun kou sut dania Firaun srep tut da cema
+Gima rino Tuhan Allah pinak
+		Mindura mang bibor mimbreia nggreu bibor
+Ba, biyai leu
+		Firauna ningona nibou ndig ninggeda
+Apino
+		Firauna joi suta nibou ndigya ce tuta
+Leu api yoni yug ndam
+		Minu Kanaan minu nia dihyei Kanaan dihyei nia
+Apino imbut ei nikineisi po
+		Muk jo sror yoka suan jo sror yok cem
+Noro ma bei inghim bei inyai ne
+		Tentara huk yoka tentara bram yoka
+Noro ma Tuhan Allah
+		Sindem tut yonia sindem tut yo cema
+Ba, bindei ba,
+		Muga tun leu yoka sauna tun leu yo cem
+Apino mben Israel imbut ba, idor ba,
+		Ingwes ngun mamira igyaijo mam beia
+Leu api tentara batalyon yoni ne imai ei isar ei
+		Muk Lipigya ninghima suan ningwoia ninyaia
+Leu api Miriam ya tut nisut bat nide bat nya ba,
+		Ikon sigyo noyama ipai sigyo dem yama.
+">
+                <span class="font-semibold text-lg">Doia 25</span>
+                <span class="block text-sm">Israel nya ingwes ngun leu Mesir cem minyei cem</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 26: Miriam brim doia cem tug ndei hukum bras cem" data-lyrics="Srat di
+		Nehei leusi pui muna Nikwop Imangti pai muna
+Tut Miriam po bon igbit yai igbit
+		Allah ngon kantia Allah ngget kan eia
+Tut gi po ug ya ser Musa di
+		Ya bikwop minita ya bikwop jama
+Leu nhyepo nggok puig mem nggok puig tut Musa ba, 
+						 /ningwes ngun leu ningon ngun leu
+		Raja ndig Firauna nibou ndig Mesira
+Leu api
+		Miriam indig sua Miriam mahan tua
+Gima rino noni nok
+		Nabi sop mem yoka nabi sindig mem yo cem
+Apino ug ya tut mben Israel di
+		Ingwes ngun leu muk ngwoia ingon ngun leu suan 
+										   /ngwoia
+Leu api Miriam kiju tut nide nimpung di ipai doia
+			Ibinggei sut Tuhan Allah ilei sut Tuhana
+Noro ma nidipti bu Niyati bu Miriam ne srep tut
+		Nikijama Musaba nide bat Mosesa
+Gima rino Tuhan Allah
+		Ningon bei kinei suta ningget bei sibui suta
+Apino Tuhan Allah
+		Kwei pinak kep bras mbreia kwei pai tes bras mina
+Ba, kwei bihwen
+		Nabi sop Miriama nabi sindig Miriama
+Apino
+		Bras yem nindigya bras hwen nindigya
+Gima rino Musa ne
+		Pui ug bak Tuhan Allah pai ug bak Tuhana
+Bipia
+		Ayai gi kei binonia ayai ningun bino cema
+Noro ma Tuhan Allah buhup ug bak Musa pia
+		Diyai sabar mem ugwe dibet dingon tut ugwe
+Noro ma
+		Bindo mem nyenia sonto mem jenia
+Nipoua bibie ne ingon ya mem
+		Allah hyet mijita Tuhan hyet mingata
+Noro ma nogindini nogindia ingkek ndok tut
+		Gembala nihyeta pembela nihyeta
+Noro ma
+		Dem igbit ngon boua pas igbit tto boua
+Ne Allahba Yesus ne niweia ninggwena
+		Ba niwei bittem nye ba ninggwen bibui je.
+">
+                <span class="font-semibold text-lg">Doia 26</span>
+                <span class="block text-sm">Miriam brim doia cem tug ndei hukum bras cem</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 27: Ikuk nye bak Tuhan Allah nongkom" data-lyrics="Srat
+	Nehei Leusi sok kep nye Nehei Leusi preu kep nya
+Pia ikuk nyew bak
+	Tuhan Allah hi ter aua Tuhan Allah hi kin aua
+Noro ma
+	Ikuk nye bak yongkoma ikuk nye bak yontia
+	Yongkom ne Tuhan Allah yonti ne Yesusa
+Yesus Tuhan Allah yoni ne
+	Ilua mem nyenia inso mem jenia.
+">
+                <span class="font-semibold text-lg">Doia 27</span>
+                <span class="block text-sm">Ikuk nye bak Tuhan Allah nongkom</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 28: Musa mbrap bit Tuhan Allah ei nungug Sinai" data-lyrics= "Srat di
+		Nehei Leusi pui muna Nehei Leusi pai muna
+Pui mun tut mun tut Musa ne kwei kiju tut kwei hyen 
+										    /tut
+		Nide kereda hagoma nide pamira hagoma
+Jimput leu jinang leu
+		Minu Mesir minu nia dihyei Mesir dihyei nia
+Ba,
+		Jug Mesir nibei nghima jug Mesir nibei nyaia
+Ba, mbut tuta bie tut nok
+		Tuhan Allah mbut tuta Tuhana bie tuta
+Ba,
+		Dimig yok kin Muk Nwgoia mbus yok kin suan ngwoia
+Mbut tut ndam  bie tut ndam nimigya nibiau nu nok 
+		Nungug Sinai nimig nua mboi Torsina nibiau nua
+Gima rino Musaba pai bipia
+		Je jibong mem daba je jigwam mem da cem
+Leu da dug kui nimig nua nibiau nu nok
+		Nungug Sinai nimig nua mboi Torsina nibiau nua
+Ba,
+		Dug mbrap bit Tuhan Allah dug cem kep Tuhana
+Gima rino mben Yahudi mben Israel
+		Icem kep puig noro bi itou kep puig noro bi
+Noro ma
+		Ngon bou ses leu eia tto bou ses leu sua
+Gima rino
+		Ingon bbwe ser mindura ingget prion ser mimbreia
+Apino ikwei ba, ikuk yo bak
+		Allah hi ter ningwesa allah hi kin nimbaia
+Ba,
+		Ibon sisar ningwigya ibon dosa nipwoia
+Leu api Tuhan Allah
+		Mbus hukum biyonia mbus hukum biyo cema
+Gima rino imai ba,
+		Iwer nimbiam ningwigya iwer nindwau nipwoia
+Leu api
+		Imai mo imaia leu indwau mo indwau leu
+Minu Kanaan dihyei gi preu po
+		Nisieng bui habiei nimbai hwen nok-nok.">
+                <span class="font-semibold text-lg">Doia 28</span>
+                <span class="block text-sm">Musa mbrap bit Tuhan Allah ei nungug Sinai</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 29: Mben Israel ibingon Tuhan Allah ei mpia ngoisi" data-lyrics="Srat kisah pui muna..star Kisah pai muna
+Tut mben Yahudi ingon ngun leu inggwes ngun leu
+Minu Mesir nisieng buigya...dihyei Firuan nimbai
+Ba, ingon ngun leu nikineisi po		     /hwena
+Minyei jo mem yok bia...bikau jo mem yok bia
+Apino Musa
+Lua bikwop mmun ngwaba...nso bikwop njap ngwaba
+Leu api Tuhan Allah pinak kep
+Njita di kwes mem yoka... njita manna mem yok cem 
+Noro ma igwam ei ba,
+Beda pus ingona...jama kiek inggeda
+Apino
+Ongon bbwe ser mindura...inggeda prion ser mimbreia
+Leu api ikuk yok bak allah hi ter di
+Ijem ninyeng Molokho...ijem ninyeng Refana
+Apino Tuhan Allah
+Sibui dihyei tut yoka...sibui dihyei tut yo cem
+Leru api murit hwop Kristen hwop
+Igya lo, ma ipus yoka...igya lo, mas ikiek yoka
+Ingat ug ngat ingat kou ngat minu Betel dihyei Kanaan
+Son di deu yonia...son dideu yo cema
+Noro ma Tuhan Allah 
+Son kimir leu yoka...son kriau leu yo cem
+Leu api ipim bipus ipim bikiek
+Minu Betel nisieng buigya...dihyei Kanaan nimbai
+Po Kaleba Yosua po				/hwena	
+Inggok tut habieia...isror tut nok-noka. ">
+                <span class="font-semibold text-lg">Doia 29</span>
+                <span class="block text-sm">Mben Israel ibingon Tuhan Allah ei mpia ngoisi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 30: Yesus kwek nye leu awak noyam kin Musa kwek yok" data-lyrics="Srat di
+	Nehei Leusi pui muna...Nehei Leusi pai muna
+Pui mun tutu pai muna tut Israel po
+	Yoni igyai iptoma...yoni ibon imunggwoma
+Po imanga inggreu ba, idigek kep
+	Minu Mesir hagoma... dihyei Mesir hagoma
+Gima rino bindei ba, Firaun ya tut nide limwa nya ba,
+	Ittin jo ninghigya...idigit jo nikera
+Gima rino nobou ndig kon
+	Nide mindor hi bua...nide mandur hi kina
+Ba, igya midyai ikes midyai di buhun tak mben
+	Yahudi yahagom...Israel yahagom
+Ba, ikwei win kep ikiju gi hyen nok
+	Minu Pitom kijua...dihyei Raamses gi hyena
+Mben Yahudi Israel inok awak mem
+	Mindor Mesir yahagoma...nibou Mesir yahagoma 
+Apino mben Yahudi mben Israel ilua tut
+	Ninghuisi gi duta...ninghuisi gi weia
+Gima rino igyhet pus ighyet kiek Arig
+	Tuhan Allah ningona...Tuhana ninggeda
+Apino Tuhan Allah ndo nide awak gom dino
+	Hig ninyeng Musaba...jem ninyeng Mosesa
+Mem gima kwei biteu kwei bibuwak mben 
+	Isreal leu awaga...Yahudi leu sisara
+Gino nok
+Sonto mem nyenia...bindo mem jenia
+Tut nipoua bibie ne nyen inok
+	Awaga bak dosaba...awaga bak sisara
+Noro Tuhan Allah
+	Pinak Yesus juk kwei...cuk Kristus srek kweia
+Ba,
+	Teh nye leu dosaba...buwak je leu sisara
+Apino nogindini nyen itug hon Yesus Kristus po noni nok
+	Niyaijo mem nyeba...niyaijo mem jeba.">
+                <span class="font-semibold text-lg">Doia 30</span>
+                <span class="block text-sm">Yesus kwek nye leu awak noyam kin Musa kwek yok</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 31: Yosua bie tut mben Israel ug ei minu Kanaan" data-lyrics="Yosua pui muna ...Yosua pai muna
+Pui mun tut pai mun tut Tuhan  Allah kwei cuk nibou pran
+								   /tentara
+Ijem ninyeng Yosua...ikon ninyeng Yusaka
+Po
+	Ya leui Musaba...ye leui Haruna
+Ba, kwei kiju tut kwei hyen tut
+	Mben Israel yahagoma...mben Yahudi yahagoma
+Ba, ijoi sut ice tut yo yug ndam
+	Minu Kanaan nisieng buigya...Yeriko nimbai hwena
+Po 
+	Nintig bou jo naia...nintig dip ya naia
+Apino yo yug krau
+	Minu hanjop minu nia...dihyei hanjop dihyei moa
+Giam rino kwei cuk kep
+	Nide awak gom-goma...nide awak can-cana
+Ba, ibinaia ibameter
+	Minu Kanaan nijeisia...Yerikho ninyantia
+Noro ma gai sera cuon ser nok
+	Raja ndig gai sera...nibou ndig cuon sera
+Noro ma 
+	Minyei Kanaan kin ser yok...minyei Yordan bitot ser
+Leu api tentara di bon igbit yai igbit		    /yok
+	Allah hyet nipuisia...Tuhan hyet nipaisia
+Ba, kwei cuk kep nimpung po Tuhan Allah
+	Ba ningon com habieia...ba ningget com nok-noka
+Po ikiju tut ighyen tut
+	Brua Gi Preu mindura...Brua Gi Preu mimbreia
+Ba, imbut bibie idor bibie
+	Yosua niyai hima...Yusak noho beia
+Apino tun leua nang  leu nok
+	Minyei Kanaan tut leua...minyei Yordan nang leua
+Gini ne bindo tut bingon tut minu Kanaan Yerikho po
+	Ninting bou jo naia...nintig dip ya naia
+Apino bitig dino
+	Ingon bei cut leu bi...ingget bei ngkwei leu bi
+	Gima rino imiep trompet noyama...imiep pun mbrei
+							      /dem yama
+Lue api nibou ndig Kanaan Yerikho di
+	Ningon bei pus eia...ningget bei kiek eia
+Apino
+	Icut bak Yusaka...icut bak Kaleba
+	Leu api ipui igyhet biyama...ipai ighyet biyama
+Bipia minu Kanaana dihyei gi preu po Yosua Kaleb nyeni
+Ninggok tut pima ri...nisror tut pima cem.	           /ne">
+                <span class="font-semibold text-lg">Doia 31</span>
+                <span class="block text-sm">Yosua bie tut mben Israel ug ei minu Kanaan</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 32: Ma imbres nyenti leu kimuntu nindibut" data-lyrics="Pai muna pai mun nok
+	Srat Yosua pui muna... srat Yosua pai muna
+Tut Allahba Tuhan po
+	Yai prenta nipoua...bui prenta bibieba
+Nontio nongkom ne
+Bui prenta ninghinya...yai prenta nikera
+Ba, 
+	Kwei bicoun nyenia...kwei bitindap jenia
+Pai jidimig jenti leu
+	Kimuntu gom-goma...kimuntu can-cana
+Gom -gom can-can po
+	Jo binghig nindibuta...jo biker ninghandoka
+Mun ndibut mun nghandok
+	Je jiyai gom aua...je jiyai can aua
+Leu kimuntu gom-goma can-can dima
+	Buhun bibor jit ugwa...buhun bibor hak ugwa
+Gino je jiyai je jikrau gima ne
+	Buhun tak jinguda...buhun tak jingada
+Gima yo ne
+	Kat binghig jingona...kat biker jinggeda
+Leu api
+	Misar tut jinguda...misar tut jingada
+Gima ne cut igbit pas igbit pui eia pai eia
+	Allah hyet pui eia... Allah hyet pai eia">
+                <span class="font-semibold text-lg">Doia 32</span>
+                <span class="block text-sm">Ma imbres nyenti leu kimuntu nindibut</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 33: Akhan ba noho rok mun di Tuhan Allah gai ser" data-lyrics="Pui muns pai mun nok
+	Srat  Yosua pui muna...srat Yosua pai muna
+Tut Tuhan Allah po
+	Yai prenta nipoua...bui prenta bibieba
+Bui kwei bak yai kwei bak
+	Israel ningot ndigya...Yahudi nimang ndigya
+Pia 
+	Jihwen bit ninghiduta...jihwe bit ninghandoka
+Ne
+	Jihwen bit ninghigya...jihwen bit nikera
+Leu nhyepo mun ndibut mun nghandok
+	Ngkwei nimun ndibuta... ngkwei nimun nghandoka
+ Mun ndibut mun nghandoka jingkwei ba,
+	Je jiyai gom aua...je jiyai can aua
+Noro ma Akhan ne ningon de sir ningget de kriau
+	Allah hyet jit eia...Allah hyet hak aie
+Nimig de nggan nibiau de nggan 
+	Sir nihyet Cig deba...kriau nihyet Pmot deba
+Ba, noni yai
+	Mun ndibut gom ugwa...mun nghandok can ugwa
+Apino Allah hyet sibui no tut Allah hyet kiek no tut Akhan 
+				        /nitnem nimunggwom bat dino
+	Ingwig ei nindibuta...isar ei ninghandoka.">
+                <span class="font-semibold text-lg">Doia 33</span>
+                <span class="block text-sm">Akhan ba noho rok mun di Tuhan Allah gai ser</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 34: Ma isrep tut Bilis nihyet hak leu ingonti" data-lyrics="Pui muna pai mun nok
+	Srat Yosua pui muna...srat Yosua pui muna
+Tut Tuhan Allah po
+	Yai prenta nipoua...bui prenta bibieba
+	Yai ma kwei nem-nnaia...bui ma kwei nggriu-uggropa
+Yai kwei bak bui kwei bak
+	Israel nyenia...Yahudi jenia
+Pai sut murid sut Kresten
+	Jihwen bit Bilisa...jihwen bit Setana
+Ne
+	Jihwe bit ninghigya...jihwe bit nikera
+Leu nhyepo nontia nongkom ne
+	Ngkwei nimun ndibuta...ngkwei nimun nghandoka
+Bilis hyet Setan hyet
+	Je jiyai gom aua...je jiyai can aua
+Noro ma
+	Isut Akhan gom-goma...isut Akhan can-cana
+Gom-goma can-can po
+Igwam bikreng mbusyama...igwam bikreng dimigyama
+Ne ingon de sir ingget de kriau
+	Allah hyet ji eia...Allah hyet hak eia
+Yoni ne imig de nggan ibiau de nggan di
+	Isir Injil Cig deba...ikriau Repo Pmot deba
+Ba, yo ibit yo ibram
+Bilis hyet  gom ugwa...Setan hyet can ugwa
+Ba, igyok yok kep igyok bram
+	Mun ndibut gom ugwa...mun nghandok can ugwa
+Gima rino bet hi kwei jam hi kwei Allah hyet sibui  no tut
+			         /kiek no tut isut Akhan gom-goma isut
+				            /Akhan can-cana minita jama
+Ingwig ei minita...isar ei jama.">
+                <span class="font-semibold text-lg">Doia 34</span>
+                <span class="block text-sm">Ma isrep tut Bilis nihyet hak leu ingonti</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 35: Niom kep ciceu tug hon niba ningon com Allah" data-lyrics="Srat Nikei pui binye...srat Nikei pai binye
+Tut 
+Nabi sop Debora...nikei sop nabia
+Po
+	Bit nihyet Tuhan Allah ...bit nihyet Tuhana
+	Bibikwop mmun ngwaba...bibikwop njap ngwaba
+Apino Tuha Allah
+	Ba ningon com noni...ba ningget com no cem
+Nabia Debora ne ug pai sut
+	Allah hyet biyonia...Allah hyet biyo cema
+Ba, kwei hig kep
+	Tungwagom nok Baraka...tungwa hi nok Baraka
+Bipia atin ei ba,
+	Nan akon mbrap ugwa...nan akon pran ugwa
+Ba, ahwen bit cicue ndig
+	Sisera jit ugwa...Yabina hak ugwa
+Leu bie tuta mbut tut nok
+	Tuhan Allah bie tuta...Tuhana mbut tuta
+Nontia nongkom ne ug om kep
+	Ade ciceu mem naba...ade nitok mem na cem 
+Ba,
+	Ahwen yok ningwigya...ahwen yok nipwoia
+Dem igbit pas igbit pui eia pai ei nok
+	Allah hyet pui eia...Allah hyet pai eia.">
+                <span class="font-semibold text-lg">Doia 35</span>
+                <span class="block text-sm">Niom kep ciceu tug hon niba ningon com Allah</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 36: Niba ningon com Tuhan Allah di om kep ide siceu" data-lyrics="Srat Nikei pai muna...srat Nikei pai muna
+Tut Tuhan Allah po kwei kon kep
+	Ningon gom Debora...ningget gom nabia
+Leu gi po bit nihyet
+	Bibikwop mmun ngwaba...bibikwop njap nggwaba
+Allahba Tuhan ne kwei kon mem
+	Israel yonia...Yahudi yo cema
+Nontia nongkom ne kim bikwop
+	Mun nindig hagoma..mun nimien nipwoia
+Ba, ug tri tut
+	Allah hyet biyonia...Allah hyet biyo cema
+Leu api kwei hig kep
+	Nikon mbrap Baraka...ninkon pran Barak cem 
+Pia atin ei mem
+	Akon mbrap dini ugwa...akon pran dima cema 
+Mem ahwen bit
+	Sinceu ndig Sisera...siceu ndig Yabina
+Leu mbut tuta bie tut
+	Tuhan Allah mbut tuta...Tuhana bie tuta
+Nontio nongkom ne ug om kep 
+	Siceu ndig leu naba...siceu ndig leu na cem
+Nantia nangkom ne 
+Ahwen yok ningwigya...ahwen yok nipwoia
+Debora Barak yoni ne
+Ihwen bit ninghigya...injei bitot nikera
+Dem igbit pas igbit
+Allah hyet nipuisia...Tuhan hyet nipaisia
+Leu api yontia yongkom ne 
+	Inggei sut Tuhan Allah...ilei sut Tuhana
+Ne
+Inggei-nggwang tut jo ninno...ilei-lau sut jo mimbrek.">
+                <span class="font-semibold text-lg">Doia 36</span>
+                <span class="block text-sm">Niba ningon com Tuhan Allah di om kep ide siceu</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 37: Tuhan Allah ttem yo di ingon jo kep nihyet bi" data-lyrics="Kwei puiakwei pai nok
+Allah hyet kwei puia...srat Repo kwei paia
+Kwei pui sut kwei pai sut
+Ningon gom Elia...ningget gom nabia
+Po
+	Ningon jo kep Tuhan Allah...ba ningon com Tuhana
+Ne
+	Ningon jo kep ninghigya...ningget jo kep nikera
+Gima rino Tuhan Allah
+Kiek nihyet pui baka...pus nihyet pai baka
+Pia nogindia nogindini ne akwei ba, 
+	Nan angat mindura...nan angat mimbreia
+Mindur ma mimbrei ma
+	Ditin ei ngwig sua...dimbus e idem tua
+Ditin ei dimbus ei ningat-hi-ngat tut
+Kuda pran mang-manga...kuda pran nggreu-nggropa
+Gima ne bindo tut
+Ciceu ndig imanga...ciceu ndig nggreua
+Po Tuhan Allah pinak kwei leu
+Minu Asyur minu nu kwei...dihyei Niniwe dihyei ma
+Injei ba, yo ikat					   /kwei	
+	Israel imanga...Yahudi inggreua
+Imanga inggreua ba, yug sut ei
+Minu Asyur minu nua...dihyei Niniwe dihyei nua
+Ba, 
+	Yug nggam ei ig buigya...yug nggam ei ig waga
+Yontia yongkom ne yug gwam lo,
+	Beda pus ingona...jama kiek inggeda
+Ne ipim bipus ipim bikiek yo ide
+	Mini kei-kau Samaria...dihye kei-kau Kanaan 
+Noro ma jun mau jun ser nggai mo nggai ser no gi hi di
+	Umer mbrei jun ser...bumbuhui mbrei nggai ser.">
+                <span class="font-semibold text-lg">Doia 37</span>
+                <span class="block text-sm">Tuhan Allah ttem yo di ingon jo kep nihyet bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 38: Tuhan Allah nyohou nabi Elia" data-lyrics="Kwei puia kwei pai nok 
+Allah hyet kwei puia...srat Repo kwei paia
+Kwei pui sut kwei pai sut Tuhan Allah po
+	Kwei pinak kep ngei ndunga...kwei pinak kep ngei
+Ngei ndunga ngei mbrei po		       /mbreia	
+	Jo kikau bet eia...jo kikau jam eia
+Ngei ndunga ngei mbrei dima ne bindei ba, ninggum hwen
+	Israel yonia...Yahudi yo cem
+Leu gi po yoni ne
+	Ibit nihyet jit bia...ibram nihyet hak bia
+Noro ma Elia nabi ne
+	Ningon jok kep Tuhan Allah...ningget jo kep Tuhana
+Tuhan Allah Tuhan ne
+	Kwei ya ser nabia...kwei nyohou Elia
+Nabia Elia ei
+	Minyei Kerit ninyaia...minyei Kerit ninghima
+Tuhan Allah Tuhan ne
+	Kwei cuk kep miniwoua...kwei pinak kep minimara
+Miniwoua minimar ne
+	Ttei roti ttei baka...su roti su baka
+Dem igbit pas igbit
+	Allah hyet nipiusia...Allah hyet nipasia
+Gini ne
+	Bindo mem nyenia...bingon mem jenia
+Pia mporo ma Tuhan Allah Tuhan kwei nyohou kep
+		Sut murit nyenia...sut Kresten jenia
+Nyohou nye leu nyohou je leu mun di buhun di
+	Kwei ma kwei mang-manga...kwei ma kwei nggreu-
+Leu nhyepo sut murit sut Kresten			  /nggropa
+	Igya nddong ei noho beia...igya ngkiem ei nimig hima
+Gima ne dem igbit pas igbit pui su ma pai su ma
+	Allah hyet pui su ma...Yesus hyet pai su ma.">
+                <span class="font-semibold text-lg">Doia 38</span>
+                <span class="block text-sm">Tuhan Allah nyohou nabi Elia</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 39: Yesus mibuwak nye ug ei gwamti bit leu nok Elia" data-lyrics="Kwei puia kwei pai nok
+	Nihyet Allah kwei puia...srat Repo kwei paia
+Kwei pui sut kwei pai sut
+	Ningon gom Elia...ningget gom nabia
+Elia nabi
+	So dideu Allahba...son dideu Tuhana
+Nontia nongkom ne
+	Son dideu ninghigya...son dideu nikera
+Apino mbut tuta dor tut nok
+	Tuhan Allah mbut tuta...Tuhana dor tuta
+Mbut tuta dor tut  ba, ug bicoi
+	Nghim nanggi nisieng hua...nghim gwamti nimbia hua
+Nisieng hua nimbai hu po
+	Nisieng Allah nisieng buigya...nimbai Allah nimbai
+Gima ne sut murit sut Kresten		          /hwena
+	Bindo mem nyenia...bingon mem jenia
+Nyenia jeni ne imbut kin igwan kin
+	Ningon di kwes noyama...ningget di sren dem yama
+Ba, idor bit idor bram
+	Allah pmot Yesusa...Tuhan Pmot Kristusa
+Nontia nongkom ne ttei nye kin buwak nye kin
+	Ingon bei lei-laua...ingget bei kwes-kwaua
+Ba, 
+	Ibimem kep puig ngon boua...ibicem kep puig tto boua
+Tto boua ngon bou dima Yesus Kristus
+	Hig nye kui umera...jem je kui bumbuhuigya
+Nyenia jeni ne yug yai kep
+	Ingut ig nibuna...ingut ig nijepa
+Leu api mbut tuta dor tut nok
+	Yesusa mbut tuta...Kristusa dor tuta
+Mbut tuta dor tut ba...ug bicoi
+Nghim nanggi nisieng hua...nghim gwamti nimbia hua
+Nisieng hua nimbai hu po Allah Pmot Maria pmot
+	Nisieng bui habiei...nimbai hwen nok-nok.">
+                <span class="font-semibold text-lg">Doia 39</span>
+                <span class="block text-sm">Yesus mibuwak nye ug ei gwamti bit leu nok Elia</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 40: Hukum kwei ndam yo di ikou nihyet" data-lyrics="Kwei puia kwei pai nok
+	Allah hyet kwei puia...srat Repo kwei paia
+Kwei pui sut kwei pai sut Tuhan Allah Tuhan po
+	Kiek nihyet mindura...kiek nihyet mimbreia
+Ba, 
+	Pui ug bak nabia...pai ug bak Elisa
+Pia aug sok kep aug peru kep
+	Isreal yahagoma...Yahudi yahagoma
+Leu nyepo yoni ne
+	Ikiek leu dosaba...ikiek leu sisara
+Leu son dideu
+	Hukum Allah kwei rina...hukum Tuhan tau rina
+Hukum dima hukum dini ne kwei bihwen yo gi hi di
+	Ikou nihyet Allahba...ikou nihyet Tuhana
+Gini be
+	Bindo mem nyenia...bingon mem jenia
+Pia jeni cem dani cem
+	Ikiek leu dosaba...ikiek leu sisara
+Ba, 
+	Ingon jo kep Tuhan Allah...iba ingon com Tuhana
+Jenia dani ne itin ei
+	Ingon bei noyama...ingget bei dem yama
+Leu nyeni ne ikan tut
+	Yesusa nikweisi bi...Kristusa nitausi bi
+Leu mpe di Yesus
+	Kwei hanyen umertia...tau hanyen bumbuhuitia
+Ne mikwei sut mitua sut kwei taua
+	Hukum ndig taua...hukum ndig kweia.">
+                <span class="font-semibold text-lg">Doia 40</span>
+                <span class="block text-sm">Hukum kwei ndam yo di ikou nihyet</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 41: Ide sisar di rap nye noyam kin bras di yem nye" data-lyrics="Srat Nibou Ndig Nya
+	Gi nicana  pui muna...gi cana pai muna
+Pui muna tut nibou pran Naaman tentara di
+	Leu minu Damsyika...leu dihyei Siria
+Po nide nibou ndig Siria
+	Nibou cut bak eia...nibou Ilor bak eia
+Noni nibou prana tentara di sindem mem
+	Minu Damsyika hagoma...dihyei Siria hagoma
+Noro ma ei nino ningkek dip ne
+	Bras mbrei yem kineia...bras mberi yem suwako
+Gima rino noni nggok tungwagom di
+	Yai gi kei binonia...yai gi kwes bino cema
+Apino noni kui kudaba mbut ndam dor ndam
+	Nabi ei nibongtia...Elisa ei ningwamti
+Ba, 
+	Hara bak nabia...hara bak Elisa
+Gino ajoi sut ne
+	Ayai gi kei bidania...ayai gi kwes bi cema
+Gima rino nabia cuk no ndam
+	Minyei Isreal ninyai nua...minyei Yordan ninghima
+Noro kou suta srep tut nok
+	Nibou prana srep tuta...Naamana kou suta
+Mun pini yok hagom nok
+Sonto mem dania...bindo mem jenia
+Tut bras ne ikwei bingon ikwei binai dosa sisar po
+Yem ingona kinei...yem inei suwako
+Ba, 
+Om kep nye ninghigya...tak kep nye nikera
+Apino bindei ba, 
+	Ingona kineia...ineia suwoka
+Noro dania jenia nyen ipai
+	Sigyo bak Yesusa...noyam bak Kristusa
+Tut gi po
+	Kwei mai nai saliba...kwei mai ei aproba
+Tut ninggrom nide di
+	Silipti saliba...silipti aproba
+Di
+	Bidip dosa leu daba...bipiap sisar leu jeba
+ Aponi nogindini nogindia ne nyeni
+	Igyai ge kei noyama...igyai gi kwes dem yama
+Gima rino dani cem jeni cem ipai sigyo ba, 
+	Inggei sut Tuhan Allah...ilei sut Yesusa
+Leu yontia yongkom ne 
+	Igyai gi kei binyeni...igyai gi kwes bijeni.">
+                <span class="font-semibold text-lg">Doia 41</span>
+                <span class="block text-sm">Ide sisar di rap nye noyam kin bras di yem nye</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 42: Ma abit mun di atri tut ei ahui him dima" data-lyrics="Kwei puia kwei pai nok
+Allah hyet kwei puia...Tuhan hyet kwei paia
+Tut Esra imam po ningon ya mem
+	Allah hyet mijita...Tuhan hyet mingata
+Nontia nongkom ne
+	Put bikwop mmun ngwaba...mian bikwop njap ngwaba
+Leu nhyepo kan igbit ngat igbit
+	Allah hyet mijita...Tuhan hyet mingata
+Ezra imam ne bingona binai ba,
+	Bit nihyet Allahba...bram nihyet Tuhana
+Ne
+	Bit nihyet ninghigya...bram nihyet nikera
+Allah hyet dima yo ne
+	Jo binghig ningon beia...jo biker ningget beia
+Ezra imam ne kwei kiju tut kwei hyen tut
+	Allah hyet sindema...Tuhan hyet mimbria
+Kwei biwin kwei bikon
+	Mben Yerus ingona...mben salem inggeda
+Kwei bakep Allah hyet Tuhan hyet kwei buhuk kwei bici
+	Nenei rom duwopa ...ningwes rom dimbaba
+Ninei rom ningwes rom
+Ngkwei nimun nindibuta...ngkwei nide ninghandoka
+Leu api Allah hyet Tuhan hyet dima ne 
+	Ntek biden Yerusa...kieng bidem salema.">
+                <span class="font-semibold text-lg">Doia 42</span>
+                <span class="block text-sm">Ma abit mun di atri tut ei ahui him dima</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 43: Yesus teh nye ug ei niyaijo kikauti" data-lyrics="Pui muna pai muna nok srat di 
+	Yesaya pui muna... Yesaya pai muna
+Pia nipoua bibie ne
+	Yahagom ei nindibuta...yahagom ei ninghandoka
+Ba, Bilisa Setan ne
+	Ninyeng bei tak kep nye...ninda bei tak kep je
+Apino 
+	Igwam binghig nindibuta...igya biker ninghandoka
+Ba, mporo ma yug sar ei
+	Ninjeng ngwoi hum muga...ninjeng ngwoi hum ndigya
+Noro dani cem jeni cem nyeni ipai
+	Sigyo ban Tuhan Allah...noyam bak Icigya
+Po 
+	Ningon ngriu tut daba..ningget nem tut jeba
+Apino kwei yai kep
+	Ningwoi dima Yesus...nimien dima Kristusa
+Ningwoi dima nimien dima
+	Srek kwei ie nindibuta..juk kwei ei ninghandoka
+Ningwoi dima nimien dima
+	Nisieng piga nindibuta...nimbai piga ninghandoka
+Nontio nongkom ne teu nye leu
+	Nindibut bei nimaia...ninghandok bei hukuma
+Teu nye ug ei yai nye ug ei
+	Nisieng Allah mindura...nimbai  Allah mimbreia
+Gima rino jeni lo, dani lo
+	Igwam binghig Allahba...igya biker Yesusa
+Allahba Yesus po
+	Ninyeng bei tak kep nye...ninda bei tak kep je
+Ba,
+	Ibimem kep puig ngon boua...ibicem kep puig tto boua
+Ser 
+	Allah Pmot Yesusa...Allah Pmot Kristusa
+Yesusa Kristus dima
+	Mikwei hanyen leu nanggi...mitau hanyen leu gwamti
+Leu nanggi leu gwamti noni nok
+Nibou ndig nok-noka...Nibou ndig sindama
+Mikwei sut misrek tut
+Malaikat ibita...Jibrail ibrama
+Yontia yongkom ne igya ug isrek ug
+	Sut murit nyenia...sut Kresten jenia
+Jeni cem dani cem
+	Itin yam kui umera...ipian yam kui bumbuhuigya
+Yesusa Kristus ne njei sut nye ug bicoi
+	Nghim nanggi nisieng hua...nghim gwamti nimbai hua
+Nisieng hua nimbia hu po
+	Allah Pmot nisieng buigya...Allah Pmot nimbai hwena
+Apino sut murit Kresten ingat ug ngat ingat kou ngat 
+		/nisieng Allah nisienga nimbai Allah nimbai dima
+       Ilei ngwig beda...inggei ngwig jama.">
+                <span class="font-semibold text-lg">Doia 43</span>
+                <span class="block text-sm">Yesus teh nye ug ei niyaijo kikauti</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 44: Nibou ndig di srek kwei ei dihyeisi mem nyeni" data-lyrics="Srat di 
+	Yesaya pui muna...Yesaya pai muna 
+Tut no gi hi di 
+	Pai nihyet Yesaya...pui nihyet nabia
+Yesaya nabi ne kwei pui sut kwei pai sut
+	Ningwoi dima Yesusa...nimien dima Kristusa
+Yesua Kristus dima 
+	Srek kwei mem nyenia...srek kwei mem jenia
+Nontia nongkoma ne 
+	Nok Nibou mem nyeba...nok Nibou mem jeba
+Ba,
+	Nok Nibou ninghigya...nok Nibou nikera
+Yesus Kristus ne
+	Bie tut ei ninggriu-nggropa...mbut tut ei ninem-nnaia
+Mbut tut ndam bie tut ndam 
+	Nibong kei mem nyeba...nigwam kei mem jeba
+Leu api jeni cem dani cem
+	Ibong bit ninghigya...igwam bit nikera
+Ninghigya niker ei
+	Nghim nanggi nisieng hua...nghim gwamti nimbai hua
+Nisieng nanggi nisieng hua nimbai gwamti nimbia hu po 
+					     /Allah Pmot Maria Pmot
+Nisieng bui habieai...nimbai hwen nok-noka.">
+                <span class="font-semibold text-lg">Doia 44</span>
+                <span class="block text-sm">Nibou ndig di srek kwei ei dihyeisi mem nyeni</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 45: Yesus gi bie tut nye ei ninem-nnai" data-lyrics="Srat di
+	Yesaya pui muna...Yesaya pai muna 
+Pui mun tut pai mun tut no gi hi di
+	Ttei nihyet Yesaya...ttei nihyet nabia
+Po kwei pui sut kwei pai sut
+	Allah Pmot Yesusa...Allah Pmot Kristusa
+Yesusa Kristus po
+		Srek kwei mem nyenia...srek kwei mem jenia
+Nontio nongkom ne
+	Nok Raja mem nyeba...nok Nibou mem jeba
+Yesus Kristus ne 
+	Gwam binghig ingona...gwam biker inggeda
+Leu api
+	Bie tut nye ei ninem-nnaia...mbut tut nye ei
+Mbut tut ndam bie tut ndam	         /ninggriu-unggropa	
+	Nghim nanggi nisieng hua...nghim gwamti nimbai hua
+Nyentia nyengkom ne
+	Ibong bit ninghigya...igwam bit nikera
+Ninghigya niker ei
+	Nghim nanggi nisieng hua...nghim gwamti nimbai hua
+Nisieng hua nimbai hu po Allah Pmot Maria pmot
+	Nisieng bui habiei...nimbai hwen nok-nok">
+                <span class="font-semibold text-lg">Doia 45</span>
+                <span class="block text-sm">Yesus gi bie tut nye ei ninem-nnai</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 46: Niba nokep allah hi ter ningwes" data-lyrics="Pui muna pai mun nok srat di
+	Yeremia pui muna...Yeremia pai muna
+Tut Yeremia nabi po kwei ttei kep
+	Allah hyet mijita...Allah hyet mingata
+Kwei bipus kwei bikiek
+	Mben Yerus ingona...mben salem inggeda
+Noro ma yoni ne
+	Ingon bei sir eia...ingat bei kriau eia
+Apino iba yokep nikuk nok bak
+	Allah hi ter ningwesa...allah hi kin nimbaia
+Ba, 
+	Iba yokep ninghigya...iba yokep nikera
+Gima rino Tuhan Allah
+	Ningon bei pus tut yok...ningget bei kiek tut yok
+Apino 
+	Yai hukum biyonia...mbus hukum biyo cema
+Yontio yongkom ne
+	Isar imun ningwigya...isar imun nipwoia
+Gima ne
+	Bindo mem nyenia...bingon mem jenia
+Ma jiba jekep
+	Ningon di rom jit aua...ningget di romhak aua
+Leu mpe di Yesus Kristus kwei hanyen umerti ne
+	Mbus hukum binye re...mbus hukum bije ri.">
+                <span class="font-semibold text-lg">Doia 46</span>
+                <span class="block text-sm">Niba nokep allah hi ter ningwes</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 47: Allah jem nye mem gima igyai kep nide midyai" data-lyrics="Pui muna pai mun nok srat di
+	Yeremia pui muna...Yeremia pai muna
+Pui mun tut pai mun tut Tuhan Allah po
+	Kwei hig kep Yeremia...kwei jem kep nabia
+Yeremia nabi ne
+	Nok nabi nibuna...nok nabi nijepa
+Nibuna nijep ne
+	Mem keret hagoma...mem pamir hagoma
+Yeremia nabi ne 
+	Buhup nihyet Allahba...buhup nihyet Tuhana
+Pia dantia dangkom ne
+	Dinok pilei ini yo...dinok pilei ma yo
+Ba, dani ne
+	Dingon bei ki bigyo...dingget bei tek bigyo
+Noro ma Tuhan Allah 
+	Pus nihyet pui baka...kiek nihyet pai baka
+Pai nantia nangkom ne
+	Attin tut mindei e...attin tut minggon e
+Attei dihyet attei dinyeng aug sut ndam
+	Mben Yerus hagoma...mben salem hagoma
+Nabia Yeremia ne
+	Bit Tuhan Allah...bit nihyet Tuhana
+Nontia nongkom ne kwei ttei kep
+	Allah hyet sindema...Allah hyet mimbria
+Kwei bipus kwei bikiek
+	Mben Yerus ingona...mben salem inggeda
+Leu nyepo yontia yongkom ne
+	Ikiek leu dosaba...ikiek leu sisara
+Noro ma yoni ne 
+	Ingon de sir jit eia...ingget de kriau hak eie
+Ba, yoni ne ikuk yok bak 
+	Allah hi ter ningwesa...allah hi kin nimbaia
+Ne
+	Ikuk yok bak ninghigya...ikuk yok bak nikera
+Apino allah hi ter allah hi kin bigen yok leu bingen je leu 
+	Allah hyet mijita...Allah hyet mingata.">
+                <span class="font-semibold text-lg">Doia 47</span>
+                <span class="block text-sm">Allah jem nye mem gima igyai kep nide midyai</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 48: Mben Yahuda itug ndei hukum ei ig bui nsi Babil" data-lyrics="Srat di
+	Yeremia pui muna...Yeremia pai muna 
+Tut nabi Yeremia po kwei bakep 
+	Allah nihyet mijita...Tuhan nihyet mingata
+Ba, kwei bipus kwei bikiek nibou ndig
+	Yahuda ningona...Yerusalem ninggeda
+Noro ma noni ne
+	Ningon bei pus tuta...ningget bei kiek tuta
+Ba, noni ug ndig kep
+	Allah nihyet mijita...Tuhan nihyet mingata
+Apino Tuhan Allah
+	Ningon bei pus tuta...ningget bei kiek tuta
+Ba, ug pinak kep
+	Nitok leu Babila...ningwam leu Kasdima
+Ba, yoni ikat
+	Mben Yehuda yahagom...mben Yerusalem hagoma
+Ba,
+	Yug sut ei Babila...buwak yok ei Kasdima
+Ba, inggam yok ei
+	Ig bui nsi Babila...ig wak nsi Kasdima
+Nok gi po
+	Ningon di kwes nabia...ningget di kwes Yeremia
+Apino ipia biyam ipui biyam pia hukum di buhun po pui
+Yeremia pai eia...nabia pui eia.		    /eia pai ei nok">
+                <span class="font-semibold text-lg">Doia 48</span>
+                <span class="block text-sm">Mben Yahuda itug ndei hukum ei ig bui nsi Babil</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 49:Tut yo di itunggwei Yesus ninggroma " data-lyrics="Pui muna pai mun nok
+	Yesaya pui muna...Yesaya pai muna
+Bisok kep bipreu kep
+	Disut bat murida...dide bat Krestena
+Bipia 
+	Jihig jingon jihig suta...jihig jingget jihig suta
+Tut 
+	Minu nijep Yerusa...dihyei nijep salema
+Po
+	Tuhan Allah tin eia...Tuhan Allah mbus eia
+Ba, minu dima dihyei dima ne
+	Nidut jo bu bia...niwei jo bu aua
+Gima rino
+	Ikon ninyeng Imama...ikon ninyeng Rajaba
+Po
+	Suling hyet bui yama...porei hyet hwen yama
+Bindo bipia
+	Minu dima Iman de...dihyei dima Rajaba de
+Apino nggruk bibor ngkiem bibor ttei binggok ttei biyai
+	Ningon sren gom heba...ningget kwes can heba
+Ba, dimbou dima ne
+	Tapisan jo sera... pilihan ya sera
+Ba, mig hammi mbus hammi yo gi hi dino itug hon
+	Yesusa ninggroma...Kristusa ninggroma
+Ne yug yai kep
+	Minu nijep Yesusa...dihyei nijep salema
+Ba, yoni ne
+	Ibongti ninno...igwamti mimbrek.">
+                <span class="font-semibold text-lg">Doia 49</span>
+                <span class="block text-sm">Tut yo di itunggwei Yesus ninggroma</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 50: Ma ingat nadi kin ingon di gom" data-lyrics="Pui muna pai mun nok
+	Srat Daniel pui muna...srat Daniel pai muna
+Tut Daniel po
+	Kuk no bak Tuhan Allah... kuk no bak Tuhana
+Kin
+	Ningon bei gom ugwa...nigget bei gom kweia
+Apino tungwa hi ter tungwa hi kin
+	Ingon bei sibui suta...ingget bei kinei suta
+Ba, yoni ne ipai kep ei
+	Nibou ndig noho beia...nibau ndig nimig hima
+Tut gi po Daniel mut niyai
+	Bibikwop mmun ngwaba...bibikwop njap ngwaba
+Apino
+	 Yug  kat kep Daniel... yug pos kep nabia
+Ba, yug com kep Daniel ei
+	Jui singati ugwa...hak singa hak ugwa
+Noro Tuhan Allah kwei pinak kep no nide
+	Malaikat sindema...Jibrail mimbrigya
+Ba, ug ya ser
+	Ningon gom Daniel...ningget gom nabia
+Apino ningon gom nabia ningget gom Daniel ne ningwes
+	    /ngun leu ningon ngun leu nuhui hima nikwai hima
+Singa mbrei nuhui hima... pusi mbrei nikwai hima.">
+                <span class="font-semibold text-lg">Doia 50</span>
+                <span class="block text-sm">Ma ingat nadi kin ingon di gom</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 51: Ma ikuk nye bak Tuhan Allah di niyaijo kikau" data-lyrics="Pui muna pai mun nok
+	Srat Daniel pui muna...srat Daniel pai muna
+Tut nibou ndig po pinak nihyet bidem
+	Minu Media hagoma...dihyei Media hagoma
+Pia ma ingat nadi bak
+	Allahba hi ter aua...allahba hi kin aua
+Noro ma
+	Ingat nadi bak nontia...ingat nadi bak nongkoma
+Ba, yo dino itunggwei nihyet itunggwei nimbrap ne com
+								      /yok ug ei
+	Jui singati ugwa...hak singati ugwa
+Noro ma
+	Ningon gom Daniela...ningget gom nabia
+Ne ug kou sut gi kuk no bak
+	Tungwatu minu nia...nibou ndig dihyei nia
+Daniel nontia nongkom ne kuk no bak Allah di 
+	Niyaijo kikaua...niyaijo ginggaba
+Po
+	Ug pai tes dihyeisia...ug pai tes mpia-bbet him
+Nontia nongkom ne ninyeng tak kepti
+	Ug hon nohonti...ug bipek nipekti bi
+Nontia nongkom ne Allah di
+	Niyaijo kakaua...niyaijo ginggaba
+Allahba Tuhan ne nisindemti
+	Ug hon nohonti bi...ug bipek nipekti bi
+Nontia nongkom ne kwei teh kep yo dino ikwei bakep
+	Ingon com nonia...ingget com no cema
+Kwei tug hon kwei ngkwei hon Yesusa Kristus po
+	Ug mai ei saliba...ug mai ei aproba
+Nonti nongkom
+	Teu yo leu hum muga...teu yo leu hum ndigya
+Nok gi po kwei teh kep Daniela nabi ba, ningwes ngun leu
+		         /ningon ngun leu nuhui hima nikwai hima
+	Singa mbrei nuhui hima...pusi mbrei nikwai hima.">
+                <span class="font-semibold text-lg">Doia 51</span>
+                <span class="block text-sm">Ma ikuk nye bak Tuhan Allah di niyaijo kikau</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 52: Daniel ningwes ngun leu singa mbrei yuhui him" data-lyrics="Srat Daniel pui muna...srat Daniel pai muna
+Tut nibou ndig po pinak nihyet bidem
+	Minu dima hagoma...dihyei dima njek dipa
+Bipia ma inga nadi bak
+	Allah hi ter bu aua...allah hi kin bu bia
+Noro ma inga nadi bak
+	Nibou ndig nontia...raja ndig nongkoma
+Ba, tungwatu di injiriek prenta itunggwei nihyet ne com
+								        /yo ug ei  
+	Jui singa mbrei ugwe...hak nau mbrei hak ugwe
+Noro ma Daniel ne ug kou sut gi nga nadi bak
+ 	Tungwatu minu nia...nibou ndig dihyei nia
+Noro ma Daniel nga nadi bak Tuhan Allah di 
+	Niyaijo kakaua...niyaijo ginggaba
+Po 
+	Ug pai tes dihyeisia...ug pai tes mpia-bbet him
+Noni ne ninyeng bei ug tak kep nide limwa
+	Ug hon nohonti bi...ug bipek nipekti bi
+Ba, ug teu kep yo di iba
+	Ingon com nonia...ingget com no cema
+Apino 
+	Teu yok leu hum muga...krau yok leu hum ndigya
+Nok gi po teu Daniel ba, ningwes ngun leu ningon ngun 
+									          /leu
+	Singa mbrei nuhui hima...nau mbrei nikwai hima
+Apino nibou ndigya rajaba
+	Kon ninyeng Allahba...kon ninyeng Tuhana.">
+                <span class="font-semibold text-lg">Doia 52</span>
+                <span class="block text-sm">Daniel ningwes ngun leu singa mbrei yuhui him</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 53: Sadrakh kin Mesakh kin Abednego ingwes ngun" data-lyrics="Srat 
+	Daniel pui muna...Daniel pai muna
+Pui mun tut pai mun tut
+	Raja ndig Babila...nibou ndig Babila
+Ya tut kep noni de
+	Tentara imanga... militer inggreua
+Dem minu nggi minu bikwop njap ikwei yai kep
+	Suling hyet bui yama...nggong mbrei hwen yama
+Ikwei bihig kep ikwei bijem kep
+	Tungwatu mang-manga...tungwatu nggreu-nggropa
+Po ikwei kon kep ei nai jo nai
+	Allah hi ter jo naia...kwar hi kin ei naia
+Ba, ikwei bihig kep ikwei bijem kep
+	Awak nijit Sadrakha...murit ningat Mesakha
+Bipia jeni gom jeni can jikuk je bak
+	Allah hi ter bit nyeba...kwar hi kin bram nyeba
+Noro ma kou suta srep tuta	
+	Sadrakh kou suta...Abednego srep tuta
+Apino nibou ndig
+	Ningon bei sibui sut yok...ningget bei mbuk tut yok
+Kat yok ba, com ug ei yon ug ei
+	Tong hum ndig nimboma...tong hum ndig ninjenga
+Po
+	Cig cai niduta...sror nindig niweia
+Noro ma ingon ngun ei ingwes ngun ei
+	Allah nonti niyai hima...Tuhan nonti noho beia
+Leu api gini ne
+	Bingon nok mindura...bindo nok mimbreia
+Ba, cok kep bitak kep prora sar nok
+	Allah hi ter prora...kwar hi kin sara.">
+                <span class="font-semibold text-lg">Doia 53</span>
+                <span class="block text-sm">Sadrakh kin Mesakh kin Abednego ingwes ngun</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 54: Tuhan ningon pus tut yo di ibon sisar" data-lyrics="Pui muna pai mun nok srat di
+	Hosea pui muna...Hosea pai muna
+Tut Hosea nabi po ug kiju tut ug hyen tut
+	Allah hyet mindura...Tuhan hyet mimbreia
+Kwen biwin kwei bikon 
+	Israel ingona...Efraim inggeda
+Pia jingkwei leu jikiek leu
+	Allah hi ter ningwesa...allah hi kin nimbaia
+Noro ma Israel Efraim ingon de sir ingget de kriau
+	Allah hyet jit eia...Tuhan hyet hak eia
+Apino idor bit idor bram
+	Allah hi ter ningwesa...allah hi kin nimbaia
+Yontia yongkom ne
+	Ikuk yok bak ninghigya...ikuk yok bak nikera
+Gima rino Tuhan Allah
+	Ningon bei pus tut yok...ningget bei kiek tut yok
+Tuhan Allah Tuhan ne ug pinak kep
+	Ningwam leu Niniwe...nitok leu Asyura
+Ba, ikiju tut yug hyen tut yo ide
+	Nintui mbrei kineia...Niyap mbrei suwoka
+Kineia suwok ba, 
+	Ikwei bihwen yonia...ikwei bibui yo cema
+Igbit nok 
+	Allah hyet pui eia...Tuhan hyet  pai eia
+Gima rino Efraim Israel ingat ug ngat ingat kou ngat
+	        /nintui mbrei kineia niyap mbrei suwok ne
+Yun leu nintuigya...icot leu niyaba.">
+                <span class="font-semibold text-lg">Doia 54</span>
+                <span class="block text-sm">Tuhan ningon pus tut yo di ibon sisar</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 55: Tuhan Allah ba nihyet binai ingonti" data-lyrics="Pui muna pai mun nok
+	Srat Amos pui muna...srat Amos pai muna
+Tut Tuhan Allah di kwei yai kep
+	Nai nijit nimuna...nai ningat nideba
+Kwei binai kwei bingon
+	Tungwatu ingona...tungwatu inggeda
+Noro ma mian kwei lo...put kwei lo,
+	Ingon bei sren bigyo...ingget bei kwes bigyo
+Gima rino Tuhan Allah
+	Ningon bei pus tut yok...ningget bei kiek tut yok
+Apino Tuhan Allah
+	Mbus hukum ei mina...bet hukum ei kuma
+Mbus ei mem bet ei mem
+	Njap tto bou tahu ugwe...njap ngon bou kwei ugwe
+Leu njap ngon bou dema njap tto bou kum ne ke yoka  ke
+	 Nidut jo ke yoka...niwei jo kep yoni.		 /yoni">
+                <span class="font-semibold text-lg">Doia 55</span>
+                <span class="block text-sm">Tuhan Allah ba nihyet binai ingonti</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 56: Tuhan ba hukum bimbas yo di ibon sisar nya" data-lyrics="Kwei puia kwei pai nok
+	Allah hyet kwei puia...srat Repo kwei paia
+Kwei pui sut kwei pai sut
+	Israel murida...Yahudi Krestena
+Po
+	Yoni ibon dosaba...yoni ibon sisara
+Gima rino Tuhan Allah kwei cuk kep
+	Ningon gom nimuna...ningget gom nideba
+Nontia nongkom ne ug ttei kep
+	Allah hyet sindema...Tuhan hyet mimbria
+Ba, 
+	Kwei bipus ingona...kwei bikiek inggeda
+Pia sut murit sut Kresten
+	Jikiek leu dosaba...jikiek leu sisara
+Leu nhyepo jeni cem dani cem
+		Ikuk nye bak Tuhan Allah...ikuk nye bak Tuhana
+Noro ma yoni ne
+	Ibit nihyet jit bia...ibram nihyet hak bia
+No ma ne Amosa nabi ne
+	Kiek nihyet pui biyok...pus nihyet pai biyok
+Pia nogindia nogindini ne
+	Jitin ei jitou kep...jimbus ei jicem kep
+Leu son dideu Tuhan Allah kwei pinak kep
+	Hukum ndig kwei rina...hukum ndig tahu rina
+Hukum dima hukum dini ne kwei dem kep
+	Nsuwer ajar nimigya...nsuwer ajar ningwaba
+Nimigya ningwa po 
+	Srig ma kwei srig buna...kibor ma kwei kibor ndoka
+Srig mau lo, srig bidem kibor mo lo, kibor bidem wa deba
+								              /srin deba
+	Israel srin deba...Israel wa deba.">
+                <span class="font-semibold text-lg">Doia 56</span>
+                <span class="block text-sm">Tuhan ba hukum bimbas yo di ibon sisar nya</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 57: Ninggum tut Tuhan nihyet hwen mben Israel" data-lyrics="Kwei puia kwei pai nok
+    Srat Amos kwei puai  srat Amos kwei paia
+Ba, bisok kep bipreu kep
+     Mben Israel yahagoma mben Yahudi yahagoma
+Pia jitin yam kwei jipian yam kwei nyeni ibit Allah hyet
+                                                                        /Alkitab
+     Nisieng ngig-ngun nisieng noka nimbai ngig-ngun
+                                                                    /nimbai noka
+Leu nisieng Allah hyet nimbai Repo ne
+      Jo beda bet bia jo jama jam bia
+Nisieng ngig-ngun nimbai ngig-ngun dima
+      Mibrim nimig leu nyeba mibrim nimig leu jeba
+Ba,
+      Nisieng ug ndam Tuhan Allah nimbai ug ndam
+                                                                         /Tuhana 
+Leu api ninggum leo Repoa Allah hyet ne cut bihwen
+      Mben Israel yahagoma mben Yahudi Yahagoma
+Ipui biyam ipai biyam pia igya bidem
+      Mpia nipriti nibiho cema  mpia nipriti nijai cema
+Noro ma yo ingat Allah hyet Alkitab
+      Nisieng ngig-ngun nisieng bia nimbai ngig-ngun
+Ndina yok ndina cemigwam ba,                        /nimbai bia
+      Ipim tut yontia icot tut yongkoma
+Ipai pia ikak mendei ikak minggon nyen ibit Allah hyet
+                                                                        /Alkitab
+     Nisieng ngig-ngun nisieng ug bi nimbai ngig-ngun
+Yontia yongkom ne                             /nimbai ug bi
+     Igya lo, ma ipus yoka igya lo, ma ikiek yoka
+Ingat ug ngat ingat kou ngat
+     Ninjeng ngwoi hum muga ninjeng ngwoi hum ndigya
+Po cig bidem sror bidem
+     Mben Bilis yahagoma mben sisar yahagoma
+Ndina yok ndina cem beda jama 
+     Srig igyai nggwei beda kibor igyai nggwei jama.">
+                <span class="font-semibold text-lg">Doia 57</span>
+                <span class="block text-sm">Ninggum tut Tuhan nihyet hwen mben Israel</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 58: Yunus nang leu Tuhan Allah nicuk noti" data-lyrics="Pui muna pai mun nok
+     Srat Yunus pui muna srat Yunus pai muna
+Tut Tuhan Allah kwei cuk kep
+     Tungwagom nok Yunusa andigpoi nok Yunusa
+Pia attei dihyet attei dinyeng aug sut ei
+     Minu Niniwe nibei nghima dihyei Niniwe nibei nyaia
+Noro ma Yunusa
+     Bit nihyet jit bia bram nihyet hak bia
+Leu api
+     Nang hak leu Tuhan Allah nang jit leu Tuhana
+Ba,
+     Ug kui kep mer igya ug bri kep kibar igya
+Mer ig kibar ig ne ug sut ndam
+     Muk soren ninnuma suan soren nidria
+Noro ma Tuhan Allah 
+     Ba sigau hwen yoka ba biget sau yoka
+Bihwen yok ei bisau yok ei
+     Muk soren ninnuma suan soren nidria 
+Leu api mben mer ig mben kibar ig
+     Injei pipus ningwigya injei ndigban nipwoia
+Leu api
+     Injei kep Yunusa imbres kep andigpoia 
+Leu mben mer ig mben kibar ig
+     Ittin tut yontia ittin tut yongkoma
+Api yoni injei Yunus ei 
+     Muk soren ninnuma suan soren nidria
+Leu api Tuhan Allah 
+     Kwei cuk kep in ndigya kwei cuk kep wau ndigya
+     Kwei pinde Yunusa kwei pinde andigpoia
+Noro ma Yunus kwei yai kep 
+     Niyaijo hanyen bu niyaijo hanyen kwei
+Nok
+     Sonto mem Yesusa bindo mem Kristusa
+Yesusa Kristus ne
+     Mai noro kiju hanyen mai noro hyen hanyen
+Yesus Kristus kwei yai kep 
+     Niyaijo hanyen bu niyaijo hanyen kwei.">
+                <span class="font-semibold text-lg">Doia 58</span>
+                <span class="block text-sm">Yunus nang leu Tuhan Allah nicuk noti</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 59: Yunus tri tut nihyet ei Niniwe" data-lyrics="     Srat Yunus pui muna srat Yunus pai muna
+Tut Tuhan Allah po kwei cuk kep
+     Yunusa mbigom bu Yunusa mbican bu
+Pia attei dihyet attei dinyeng
+     Aug sut ndam Niniwe aug sut ndam Nimroda
+Yunus ne
+     Bit nihyet Tuhan Allah bit nihyet Tuhana
+Ba, mbut bidem ya bidem
+     Minu Niniwe hagoma dihyei Nimrod hagoma
+Api ba
+     Nicot pai dem minua nicot pai nggi minua
+Pia njap nyatungwacan bu ne Tuhan Allah kwei ndig kep
+     Minu niniwe hagoma dihyei Nimrod hagoma
+Gima rino mben Niniwe mben Nimrod yug ya ei
+     Ingon bei digita ingget bei bingmaia
+Leu api yoni ne
+     Ipai sut dem minua ipui sut nggi minua
+Kikau ug bipek 
+     Raja ndig Niniwe nibou ndig Nimroda
+Apino krau kep 
+     Ninyeng di jei bu bia ninyeng di jei bu aua
+Noro ma noni kes sinsun raja tut
+     Ninyeng di jei jo eia ninyeng di jei nna eia
+Leu api ikwei yai kep
+     Sinsun kron noyama sinsun kron dem yama
+Gi bindo pia
+     Ikiek leu dosaba ikiek leu sisara
+Ba,
+     Ijem ampon noyama ijem ampon dem yama     
+Leu api
+     Ikiek bak Tuhan Allah ikiek bak Tuhana
+Apino Tuhan Allah 
+     Ningon bei nggriu sut yok ningget bei nem tut yok
+Gima rino Tuhan Allah kwei ndig kep yo ide
+     Minu Niniwe bu bia dihyei Nimrod bu aua.">
+                <span class="font-semibold text-lg">Doia 59</span>
+                <span class="block text-sm">Yunus tri tut nihyet ei Niniwe</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 60: Tuhan Allah luei ningonti bi" data-lyrics="Srat 
+     Maleakhi pui binye Maleakhi pai binye
+Tut Tuhan Allah 
+     Ug pai sut nontia ug pai sut nongkoma
+Pia
+     Danti ne Tuhana dangkom ne Tuhan Allah 
+Po 
+     Da diluei dingon bi da diluei dingget bi
+Kikau ba, 
+     Da dingkwei bu bia da dingkwei leu bia.">
+                <span class="font-semibold text-lg">Doia 60</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 61: Gi ikwas mun tut Tuhan Allah" data-lyrics="Srat 
+     Maleakhi pui binye Maleakhi pai binye
+Pia 
+     Ikwas mun tut Allahba ikwas mun tut Yesusa
+Ne
+     Tuhan Allah ngat tua Tuhan Allah pas tua
+Leu api Tuhan Allah Tuhan Yesus yoni ne
+     Ikum eisi binyenia ikwas hanyen bijenia">
+                <span class="font-semibold text-lg">Doia 61</span>
+                <span class="block text-sm">Gi ikwas mun tut Tuhan Allah</span>
+            </button>
+			 <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 62: Yesus tin puig niyaijo ei biei salibti mem nyeni" data-lyrics="Pui muna pai mun nok
+     Nihyet Di Kei pui muna Nihyet Di Kei pai muna
+Tut Allahba Tuhan po
+     Luei nitta ningwoia luei nitta nimiena
+Ba, srek ei
+     Ig domba Yudea ig kandan Betlehema
+Noyam kin
+     Ningwoi-ngwoi minu nia mimien-mien dihyei nia
+Ba, 
+     Biku ninyeng Allahba biku ninyeng Tuhana
+Leu nhyepo yai igbit bon igbit
+     Allah ngon kantia Allah ngget kan eia
+Leu api binang ndam bisau ndam
+     Biei salib Joljuta biei salib Golgota
+Bitin puig ndam bitot puig ndam
+     Niyaijo kikaua niyaijo ginggaba
+Nontia nongkom ne noni nok
+     Puig di kei mem nyeba puig di kei mem jeba
+Noro ma
+     Dem igbit ngon boua pas igbit tto boua
+Ne Yesusa Kristus
+     Mikwei hanyen umertia mitau hanyen bumbuhuitia
+Ne
+     Nok ningwoi bu bia nok nimien bu aua
+Noro ma
+     Nok Raja nok-noka nok Nibou sindama
+Ya tut noni nide
+     Malaikat sindem nya Jibrail mimbri nya
+Ikwei sut isrek tut
+     Hukum ndig Allahba hukum ndig Yesusa
+Ba, yoni ne ibicig huk ibsror huk yo gi hi di
+     Ikou nihyet Allahba ikou nihyet Yesusa
+Yoni ne
+     Igyati ninghigya igyati nikera
+Gima rino ipui biyam ipai biyam pia nna ei jo ei 
+     Igyai nidut nna ei igyai niwei jo ei.">
+                <span class="font-semibold text-lg">Doia 62</span>
+                <span class="block text-sm">Yesus tin puig niyaijo ei biei salibti mem nyeni</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 63: Tuhan Allah luei nitta nok tungwatu" data-lyrics="Sut murit sut Kresten ikwei bakep doia ma doia ni ikwei 
+						  	    /biwim 
+     Ningwoi dima Yesusa…nimien dima Kristusa
+Yesusa Kristus ne
+     Gwam mumpui gwam tu ma…gwam mimbrek ghwam ei 
+Ei 								    /ma
+     Nisieng nanggi nisieng hua…nimbai gwamti nimbai hua
+Nonti a nongkom ne
+     Noyam kin nicigya…noyam kin Tuhan Allah 
+Noro ma ug ngondut nye dino
+     Tungwatu minu nia…tungwatu dihyei nia
+Apino Tuhan Allah Tuhan ne
+     Luei nitta ningwoia…leui nitta nimiena
+Ba, srek kwei ei 
+     Minu Bilis minu nia…dihyei sisar dihyei nia
+Gima ne dem igbit pas igbit
+     Allah hyet pui eia…Allah hyet pai eia
+Leu jihwen
+     Teu nye leu dosaba…krau nye leu sisara
+Teu nye ug ei
+     Nisieng Allah nisieng nia…nimbai Allah nimbai nia
+Apino murit sut Kresten ingon ngun leu ingwes ngun leu 
+     /puig hum muk puig hum ndig gi di po pui eia pai ei nok
+     Allah hyet pui eia…Allah hyet pai eia.">
+                <span class="font-semibold text-lg">Doia 63</span>
+                <span class="block text-sm">Tuhan Allah luei nitta nok tungwatu</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 64: Malaikat tto ei mem Zakaria tut nipmot" data-lyrics= "Tuhan Allah cuk
+     Malaikat leu nanggia…malaikat leu gwamtia
+     Kwei pui bak Zakaria…kwei tto ei mem Zakaria 
+Pia 
+     Nan ayai apmota…nan ayai amunggwoma
+Ne
+     Ajem ninyeng Yohanesa…akon ninyeng Yahyaba
+Kwei pai biyok 
+     Jitin ei jitou kepa…jitin ei jicem kepa
+Ingat mot gom di 
+     Ijem ninyeng Domba Allah…ikon ninyeng Domba Allah.">
+                <span class="font-semibold text-lg">Doia 64</span>
+                <span class="block text-sm">Malaikat tto ei mem Zakaria tut nipmot</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 65: Ma nyeni yom ingon dem kepo nok Yusuf" data-lyrics="Pui muna pai mun nok
+     Matius pui muna…Matius pai muna
+Tut Yusufa Yosef po
+     Yo wa kep Maria…yo srin ser Maryama
+Yusufa Yosef ne 
+     Ningon bei kwes jita…ningget bei kwes haka
+Nonti nongkom ne
+     Kuk no bak Tuhan Allah…kuk no bak nicigya
+Nicigya Tuhan Allah ne
+     Kuk no bak ninghigya…kuk no bak nikera
+Apino Tuhan Allah nicig ne
+     Yai ningon nggriu keia…yai ningon nem keia
+Leu gi po yai igbit bon igbit 
+     Allah ngon kantia…Allah ngget kan eia
+Apino Yusufa Yosef ne nok
+     Sonto mem nyenia…bindo mem jenia
+Sonto leu Yusufa bindo leu Yosef ne kuma dem nok
+     Om ningon kuma…om ningget dema.">
+                <span class="font-semibold text-lg">Doia 65</span>
+                <span class="block text-sm">Ma nyeni yom ingon dem kepo nok Yusuf</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 66: Yusuf yok wa kep Maria" data-lyrics="Srat
+     Matius pui binye…Matius pai binye 
+Pia Yesus Kristus ne
+     Ug juk ei gi tou i…ug srek ei hantou I
+     Ug juk ei Yudea…ug srek ei Betlehema
+Yesus ne
+     Nipmem ninyeng Maria…nipmem ninyeng Maryama
+Yusufa
+     Yok wa kep Maria…yok srin kep Maryama
+Noro
+     Iwak yam biigyo…inok gom biigyo
+Leu Maria Maryam ne 
+     Ningon jo kep Tuhan Allah…ningget jo kep Tuhana
+Igbit nok
+     Allah hyet pui eia…Allah hyet pai eia.">
+                <span class="font-semibold text-lg">Doia 66</span>
+                <span class="block text-sm">Yusuf yok wa kep Maria</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 67: Maria ningon kwes jit" data-lyrics="     Matius pui binye…Matius pai binye
+Pia Maria Maryam ne
+     Ningon bei kwes jita…ningget bei piga jita
+Ba, 
+     Ningon jo kep Tuhan Allah…ningget jo kep Tuhana
+Apino Allah Tuhan ne cuk
+     Ninei Gi Kwes ya sera…Ninei Gi Kwes gwam sera
+Maria Maryam ne
+     Srek tut Yesusa…srek tut Kristusa 
+     Srek tut ei Yudea…srek tut ei Betlehema
+Yesus Kristus ne
+     Kwes-kwau mem nyenia…dia-diau mem jenia
+Bingon mem bindo mem
+     Munggwom murit nijita…munggwom Kresten ningada
+Leu nonti nongkom
+     Teu nye leu hum muga…krau je leu hum ndigya.">
+                <span class="font-semibold text-lg">Doia 67</span>
+                <span class="block text-sm">Maria ningon kwes jit</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 68: Malaikat kwei pai bak Yusuf" data-lyrics="Matius pui binye…Matius pai binye 
+Pia malaikat Jibrail
+     Kwei pai bak Yusufa…Kwei pui bak Yosefa
+Pia Maria Maryam ne
+     Srek tut Yesusa…srek tut Krsitusa
+Leu api Yusuf Maria 
+     Ijem ninyeng Yesusa…ikon ninyeng Kristusa
+Yesus Kristus 
+     Teu nye leu dosaba…krau nye leu sisara.">
+                <span class="font-semibold text-lg">Doia 68</span>
+                <span class="block text-sm">Malaikat kwei pai bak Yusuf</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 69: Maria bit Tuhan Allah ningon kanti" data-lyrics="Pui muna pai mun nok
+     Srat Lukas pui muna…Srat Lukas pai muna
+Tut Maria Maryam po
+     Ningon jo kep Tuhan Allah…ningget jo kep Tuhana
+ Nontia nongkom ne
+     Niyaijo kei-Kaua…niyaijo dia diaua
+Yai igbit bon igbit 
+     Allah ngon kantia…Allah ngget kan eia
+Apino Tuhan Allah 
+     Ningon bei nggriu suta…ningget bei nem tuta
+Ba, ug cuk kep
+     Ninei Gi Kwes ya sera…Ninei Gi Kwes gwam sera
+Kikau ba, Maria Maryam ne
+     Srek tut Yesusa…srek tut Kristusa 
+Yesusa Kristusa ne
+     Nok Nibou mem daba…nok Nibou mem jeba
+Nontia nongkom ne
+     Teu da leu dosaba…krau je leu sisara
+Nogindia nogindini iba nyekep
+     Niyaijo kikaua…niyaijo ginggaba
+Gima rino jeni cem dani cem ingon kei ingget kei di
+     Inggei-nggwang tut Allahba…ilei-lau sut Yesusa.">
+                <span class="font-semibold text-lg">Doia 69</span>
+                <span class="block text-sm">Maria bit Tuhan Allah ningon kanti</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 70: Maryam bit Tuhan Allah ningon kantia" data-lyrics="Srat Lukas pui binye…srat Lukas pai binye
+Pia Tuhan Allah cuk
+     Malaikat leu gwamtia…Jibrail leu nanggia
+     Kwei pai bak Maria…kwei pai bak Maryama
+Pia nani ne angon bei kwes leu yo di
+     Minu ni hagoma…dihyei ni hagoma
+Gima rino ug ei bet muhwindatai ne
+     Nan ayai apmota…nan ayai amunggwoma 
+     Ajem ninyeng Yesusa…akon ninyeng Kristusa
+Leu api Maria Maryam ne
+     Ngig nitingou ei mema…kau ningon ei kuma
+Apino jit ugwa hak ugwa
+     Bit nihyet jit ugwa…bram nihyet hak ugwa.">
+                <span class="font-semibold text-lg">Doia 70</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 71: Maryam ningon gom mem Tuhan Allah" data-lyrics="Pui muna pai mun nok
+     Srat Lukas pui muna…Srat Lukas pai muna
+Tut
+     Ningon gom Maria…ningget gom Maryama
+Po Tuhan Allahba
+     Ningon com habieia…ningget com nok-noka
+Gima rino sok nihyet ei
+     Malaikatti kweia…Jibrailti kweia
+Ba,
+     Pui mun bak Maria…pai mun bak Maryama 
+Bipia ug ei bet muhwindatai ne
+     Nan ayai apmota...nan ayai amunggwoma
+No ma ne Maria Maryam ne
+     Ningon bei digit tuta…ningget bei mpig suta
+Pai bipia dani ne
+     Diwak dicep hi bigyo…diwak disut hi bigyo
+Ba, 
+     Diyai dimunggwom notou i…diyai dipmot notou i
+Gima rino malaikat Jibrail
+     Pus nihyet pui baka…kiek nihyet pai baka
+Bipia nani ne
+     Ahig angon tut aua…ahig angget tut bia
+Leu munggwom dima ne igbit nok Tuhan Allah
+     Ningon bei kantia…ningget bei kan eia
+Gima rino Maria Maryam ne pai bipia nna ba, dinok
+     Awak bak Tuhan Allah…awak bak Tuhana
+Ba, mun hagom dem igbit pas igbit
+     Malaikat pui eia…Jibrail pai eia.">
+                <span class="font-semibold text-lg">Doia 71</span>
+                <span class="block text-sm">Maryam ningon gom mem Tuhan Allah</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 72: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 72</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 73: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 73</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 74: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 74</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 75: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 75</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 76: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 76</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 77: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 77</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 78: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 78</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 79: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 79</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 80: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 80</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 81: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 81</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 82: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 82</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 83: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 83</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 84: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 84</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 85: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 85</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 86: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 86</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 87: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 87</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 88: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 88</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 89: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 89</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 90: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 90</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 91: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 91</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 92: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 92</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 93: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 93</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 94: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 94</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 95: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 95</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 96: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 96</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 97: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 97</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 98: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 98</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 99: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 99</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 100: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 100</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 101: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 101</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 102: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 102</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 103: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 103</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 104: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 104</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 105: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 105</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 106: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 106</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 107: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 107</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 108: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 108</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 109: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 109</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 110: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 110</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 111: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 111</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 112: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 112</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 113: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 113</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 114: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 114</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 115: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 115</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 116: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 116</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 117: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 117</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 118: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 118</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 119: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 119</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 120: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 120</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 121: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 121</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 122: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 122</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 123: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 123</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 124: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 124</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 125: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 125</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 125: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 125</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 126: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 126</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 127: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 127</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 128: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 128</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 129: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 129</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 130: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 130</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 131: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 131</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 132: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 132</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 133: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 133</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 134: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 134</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 135: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 135</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 136: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 136</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 137: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 137</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 138: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 138</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 139: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 139</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 140: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 140</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 141: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 141</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 142: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 142</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 143: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 143</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 144: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 144</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 145: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 145</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 146: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 146</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 147: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 147</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 148: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 148</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 149: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 149</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 150: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 150</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 151: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 151</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 152: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 152</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 153: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 153</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 154: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 154</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 155: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 155</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 156: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 156</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 157: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 157</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 158: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 158</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 159: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 159</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 160: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 160</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 161: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 161</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 162: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 162</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 163: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 163</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 164: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 164</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 165: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 165</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 166: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 166</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 167: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 167</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 168: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 168</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 169: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 169</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 170: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 170</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 171: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 171</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 172: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 172</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 173: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 173</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 174: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 174</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 175: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 175</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 176: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 176</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 177: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 177</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 178: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 178</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 179: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 179</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 180: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 180</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 191: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 191</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 192: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 192</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 193: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 193</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 194: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 194</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 195: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 195</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 196: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 196</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 197: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 197</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 198: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 198</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 199: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 199</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 200: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 200</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 201: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 201</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 202: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 202</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 203: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 203</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 204: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 204</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 205: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 205</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 206: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 206</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 207: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 207</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 208: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 208</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 209: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 209</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 210: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 210</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 211: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 211</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 212: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 212</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 213: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 213</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 214: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 214</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 215: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 215</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 216: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 216</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 217: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 217</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 218: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 218</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 219: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 219</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 220: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 220</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 221: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 221</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 222: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 222</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 223: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 223</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 224: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 224</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 225: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 225</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 226: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 226</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 227: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 227</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 228: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 228</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 229: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 229</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 230: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 230</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 231: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 231</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 232: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 232</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 233: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 233</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 234: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 234</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 235: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 235</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 236: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 236</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 237: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 237</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 238: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 238</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 239: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 239</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 240: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 240</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 241: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 241</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 242: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 242</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+	     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 244: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 244</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 245: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 245</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 246: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 246</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 247: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 247</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 248: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 248</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 249: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 249</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 250: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 250</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 251: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 251</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 252: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 252</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 253: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 253</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 254: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 254</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 255: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 255</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 256: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 256</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 257: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 257</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+             <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 258: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 258</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 259: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 259</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 260: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 260</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 261: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 261</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 262: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 262</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 263: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 263</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 264: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 264</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 265: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 265</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 266: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 266</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 267: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 267</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 268: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 268</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 269: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 269</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 270: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 270</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 271: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 271</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 272: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 272</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 273: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 273</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 274: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 274</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 275: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 275</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 276: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 276</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 277: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 277</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 278: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 278</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 279: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 279</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 280: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 280</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 281: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 281</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 282: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 282</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 283: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 283</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 284: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 284</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 285: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 285</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 286: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 286</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 287: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 287</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 288: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 288</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 289: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 289</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 290: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 290</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 291: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 291</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 292: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 292</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 293: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 293</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 294: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 294</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 295: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 295</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 296: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 296</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 297: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 297</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 298: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 298</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 299: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 299</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+<button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 300: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 300</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+  <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 301: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 301</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+  <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 302: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 302</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+  <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 303: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 303</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+ <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 304: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 304</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+  <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 305: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 305</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+ <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 306: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 306</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+      <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+      <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+    <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>   
+  <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+    <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+  <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+    <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+   <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button> 
+    <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+    <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+    <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+     <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+   <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+    <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+   <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+   <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+  <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+   <button class="hymn-item bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md hover:bg-blue-200 transition duration-200 text-left" data-title="Doia 243: #" data-lyrics="#">
+                <span class="font-semibold text-lg">Doia 243</span>
+                <span class="block text-sm">Tuhan Allah luei ningonti bi</span>
+            </button>
+            
+            <!-- Tambahkan lebih banyak kidung di sini jika diperlukan -->
+        </div>
+
+        <!-- Tampilan Lirik Kidung yang Dipilih -->
+        <div id="hymnDisplay" class="bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200 min-h-[200px]">
+            <h2 id="hymnTitle" class="text-2xl font-bold text-gray-800 mb-3">Pilih Kidung dari Daftar</h2>
+            <p id="hymnLyrics" class="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                Klik pada judul kidung di atas untuk menampilkan liriknya di sini.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer Aplikasi -->
+    <footer class="mt-8 text-gray-500 text-sm text-center">
+        &copy; 2025 Aplikasi Doia Mem Mbusyamei Nya di Buat Oleh Baker Apps DEv
+    </footer>
+
+    <script>
+        // Mendapatkan referensi ke elemen HTML
+        const searchInput = document.getElementById('searchInput');
+        const hymnList = document.getElementById('hymnList');
+        const hymnTitleDisplay = document.getElementById('hymnTitle');
+        const hymnLyricsDisplay = document.getElementById('hymnLyrics');
+
+        // Menambahkan event listener ke setiap tombol kidung
+        document.querySelectorAll('.hymn-item').forEach(button => {
+            button.addEventListener('click', function() {
+                const title = this.getAttribute('data-title');
+                const lyrics = this.getAttribute('data-lyrics');
+                displayHymn(title, lyrics);
+
+                // Menghapus kelas 'active' dari semua tombol
+                document.querySelectorAll('.hymn-item').forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('bg-blue-100', 'text-blue-800');
+                });
+                // Menambahkan kelas 'active' ke tombol yang diklik
+                this.classList.remove('bg-blue-100', 'text-blue-800');
+                this.classList.add('bg-blue-600', 'text-white');
+            });
+        });
+
+        // Fungsi untuk menampilkan lirik kidung
+        function displayHymn(title, lyrics) {
+            hymnTitleDisplay.textContent = title;
+            hymnLyricsDisplay.textContent = lyrics;
+        }
+
+        // Fungsi untuk memfilter kidung berdasarkan input pencarian
+        function filterHymns() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const hymnItems = hymnList.querySelectorAll('.hymn-item');
+
+            hymnItems.forEach(item => {
+                const title = item.getAttribute('data-title').toLowerCase();
+                // Memeriksa apakah judul kidung mengandung searchTerm
+                if (title.includes(searchTerm)) {
+                    item.style.display = 'block'; // Tampilkan kidung jika cocok
+                } else {
+                    item.style.display = 'none'; // Sembunyikan kidung jika tidak cocok
+                }
+            });
+        }
+
+        // Inisialisasi: Tampilkan kidung pertama secara default saat aplikasi dimuat
+        window.onload = function() {
+            const firstHymnButton = document.querySelector('.hymn-item');
+            if (firstHymnButton) {
+                firstHymnButton.click(); // Simulasikan klik pada kidung pertama
+            }
+        };
+    </script>
+
+<script>
+  function filterHymns() {
+    const input = document.getElementById("searchInput");
+    const filter = input.value.toLowerCase();
+    const buttons = document.getElementsByClassName("hymn-item");
+
+    for (let i = 0; i < buttons.length; i++) {
+      const title = buttons[i].getAttribute("data-title").toLowerCase();
+      if (title.includes(filter)) {
+        buttons[i].style.display = "";
+      } else {
+        buttons[i].style.display = "none";
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
